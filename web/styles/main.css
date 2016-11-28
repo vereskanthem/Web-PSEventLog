@@ -1,0 +1,144 @@
+body { margin: 0px; background: #F7F7F8; }
+
+header    {
+
+    margin: auto;
+    position: fixed;
+    /*height: 130px;*/
+    width: 100%;
+    /*background: #363940;*/
+    color: #F7F7F8;
+    display: block;
+    opacity: 0.96;
+    top: 0;
+    z-index: 100;
+
+}
+
+.right-of-page   {
+
+    margin-right: 10px;
+    margin-left: 0px;
+    margin-top: -10px;
+    margin-bottom: 10px;
+    position: static;
+    height: 100%;
+    width: 45%;
+    float: right;
+    background: antiquewhite;
+    border: 3px solid #7b7b7b;
+
+}
+
+.left-of-page   {
+
+    margin: 0px;
+    position: static;
+    height: 50%;
+    width: 50%;
+    float: left;
+    background: whitesmoke;
+
+}
+
+#div-box1       {
+
+    position: relative;
+    background-color: whitesmoke;
+    /*float: inherit;*/
+    height: 98%;
+    width: 45%;
+    float: left;
+    border: 2px solid #2e3138;
+    padding: 9px;
+    /*display: flex;*/
+    display: inline-block;
+    overflow: auto;
+
+}
+
+#div-box2       {
+
+    position: relative;
+    background-color: whitesmoke;
+    /*float: inherit;*/
+    height: 98%;
+    width: 45%;
+    float: right;
+    border: 2px solid #2e3138;
+    padding: 9px;
+    /*display: flex;*/
+    display: inline-block;
+    overflow: auto;
+
+}
+
+.mini-container    {
+
+    margin-top: 0px;
+    height: 150px;
+    background: #050405;
+
+}
+
+.header-container   {
+
+    margin-top: 160px
+
+}
+
+.example-inscriptions   {
+
+    margin-bottom: 20px;
+    margin-top: 10px;
+    margin-right: 10px;
+    margin-left: 30px;
+    padding: 5px;
+    font-family: sans-serif;
+    font-size: 14px;
+    font-style: inherit;
+    font-style: inherit;
+    background-color: rgba(3, 11, 1, 0.36);
+    /*background-size: 100px 100px;*/
+    text-align: center;
+    width: 85%;
+    border-radius: 10%;
+
+}
+
+#view1   {
+
+    /*position: fixed;*/
+    text-align: left;
+    width: 100%;
+    margin: 0 auto;
+
+}
+
+#view2   {
+
+    /*position: fixed;*/
+    text-align: left;
+    width: 100%;
+    margin: 0 auto;
+
+}
+
+#commands   {
+
+    color: slategray;
+
+}
+
+.k-button   {
+
+    min-width: 410px;
+
+}
+
+.test   {
+
+    position: fixed;
+    width: 100%;
+
+}

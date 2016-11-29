@@ -9,13 +9,16 @@ import javax.servlet.http.HttpServlet;
 
 public class GetJSONFromJS extends HttpServlet {
 
-//    protected String jsonString;
-//    protected JSONObject jsonObject;
-//    int getJSON()   {
+    String jsonString;
+    protected JSONObject jsonObject;
+
+    int getJSON()   {
 //
-//        jsonString = request.getParameter("jsonData");
+//        jsonString = getParameter("jsonData");
 //        jsonObject = (JSONObject) JSONValue.parse(jsonString);
-//
-//    }
+
+
+        return 1;
+    }
 
 }

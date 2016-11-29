@@ -46,11 +46,11 @@ header    {
     position: relative;
     background-color: whitesmoke;
     /*float: inherit;*/
-    height: 98%;
+    height: 45%;
     width: 45%;
     float: left;
     border: 2px solid #2e3138;
-    padding: 9px;
+    padding: 20px;
     /*display: flex;*/
     display: inline-block;
     overflow: auto;
@@ -62,8 +62,24 @@ header    {
     position: relative;
     background-color: whitesmoke;
     /*float: inherit;*/
-    height: 98%;
-    width: 45%;
+    /*height: 40%;*/
+    width: 40%;
+    float: right;
+    border: 2px solid #2e3138;
+    padding: 9px;
+    /*display: flex;*/
+    display: inline-block;
+    overflow: auto;
+
+}
+
+#div-jsp       {
+
+    position: relative;
+    background-color: whitesmoke;
+    /*float: inherit;*/
+    /*height: 40%;*/
+    width: 40%;
     float: right;
     border: 2px solid #2e3138;
     padding: 9px;

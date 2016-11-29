@@ -1,6 +1,7 @@
 <%@ page import="org.json.simple.JSONObject" %>
-<%@ page import="org.json.simple.JSONValue" %><%--<%@ page import="org.json.simple.JSONObject" %>--%>
-<%--<%@ page import="org.json.simple.JSONValue" %>--%>
+<%@ page import="org.json.simple.JSONValue" %>
+<%@ page import="static java.lang.Math.random" %>
+<%@ page import="java.util.Random" %>
 
 <%--
   Created by IntelliJ IDEA.
@@ -81,7 +82,7 @@
 
 <%--<script> $("#datepicker").kendoDatePicker(); </script>--%>
 
-<input type="hidden" id="jsonData" name="jsonData">
+<input type="hidden" id="jsonData" name="jsonData"/>
 
 <script>
 
@@ -131,18 +132,26 @@
 
             var json = convert_to_JSON(json_buffer);
 
-            $('#jsonData').val(json);
+            if(json != null)    {
 
-            $('#div-box1').append(json)
+                document.getElementById('jsonData').value = json;
+
+                var div1 = document.getElementById('jsonData');
+
+                $('#div-box2').html(document.getElementById('jsonData').value);
+                $('#div-box2').hide().fadeIn('fast');
+                $('#div-jsp').hide().fadeIn('fast');
+
+            }
+
+//            $('#div-box2').load("request_out.jsp");
 
             node.appendChild(litextnode);
 
             ul.appendChild(node);
-//            ul.appendChild(br);
             ul.appendChild(nametextNode);
             ul.appendChild(br);
             ul.appendChild(firstdateNode);
-//            ul.appendChild(br);
             ul.appendChild(lastdateNode);
 
         }
@@ -212,28 +221,37 @@
     <%--.....--%>
     <%--.....--%>
     <div id="div-box1" class="k-content">
+        <font color="gray">Transactions:</font>
         <ul id="commands">
 
         </ul>
     </div>
+
     <div id="div-box2" class="k-content">
+        <font color="#b0c4de">JSON Out</font>
+        <%--<%--%>
 
-    <%= request.getParameter("jsonData")%>
+            <%--Random rand;--%>
 
-    <%
+            <%--rand = new Random();--%>
 
-//        String jsonString;
-//        JSONObject jsObject;
-
-//        jsObject = (JSONObject) JSONValue.parse(jsonString);
-
-//        System.out.println(jsonObject.get("name"));
-
-    %>
-    <%--Test JSP <%= jsonString%>--%>
-
+            <%--if(rand.nextDouble() > 0.5) {--%>
+                <%--out.println("OUT from java at index.jsp!");--%>
+            <%--}   else    {--%>
+                <%--out.println("OUT from java at index.jsp!!");--%>
+            <%--}--%>
+            <%----%>
+        <%--%>--%>
     </div>
+    <div id="div-jsp" class="k-content">
+        <%--<%--%>
+            <%--String req = request.getParameter("jsonData");--%>
+            <%--if(req != null) out.println(req);--%>
+            <%--else            out.println("<font color=\"red\">JSP Out</font>");--%>
+        <%--%>--%>
 
+        <%= (String)request.getAttribute("jsonData") %>
+    </div>
     <%--<div id="div-box2" class="k-content">--%>
 
     <%--</div>--%>

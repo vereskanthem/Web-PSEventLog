@@ -2,6 +2,7 @@
   <library name="JsonProcessing">
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/lib/json-simple-1.1.1.jar!/" />
+      <root url="jar://$USER_HOME$/_dstr/Java/gson-2.8.0.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

@@ -11,23 +11,38 @@ import static java.lang.System.*;
 /**
  * Created by nlare on 29.11.16.
  */
-@WebServlet(name = "GetJSON")
+//@WebServlet(name = "GetJSON")
 public class GetJSON extends HttpServlet {
+
+    String jsonDataString;
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        String jsonDataString = request.getParameter("jsonData");
-        PrintWriter writer = response.getWriter();
 
-        if(jsonDataString != null) {
-            out.println(jsonDataString);
-            writer.println(jsonDataString);
-        }
+//        PrintWriter writer = response.getWriter();
+
+
+//        jsonDataString = request.getParameter("jsonData");
+//
+//        if(jsonDataString != null) {
+//            out.println(jsonDataString);
+//            writer.println(jsonDataString);
+//        }   else    {
+//
+//            out.println("jsonDataString is NULL");
+//
+//        }
 
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+//        response.setContentType("text/html");
+//        response.sendRedirect("index.jsp?test=stTSst");
+
     }
+
+
 
 
 }

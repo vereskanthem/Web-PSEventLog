@@ -15,21 +15,6 @@ header    {
 
 }
 
-.right-of-page   {
-
-    margin-right: 10px;
-    margin-left: 0px;
-    margin-top: -10px;
-    margin-bottom: 10px;
-    position: static;
-    height: 100%;
-    width: 45%;
-    float: right;
-    background: antiquewhite;
-    border: 3px solid #7b7b7b;
-
-}
-
 .left-of-page   {
 
     margin: 0px;
@@ -41,16 +26,31 @@ header    {
 
 }
 
+.right-of-page   {
+
+    margin-right: 10px;
+    margin-left: 0px;
+    margin-top: -10px;
+    margin-bottom: 10px;
+    position: static;
+    height: 185px;
+    width: 48%;
+    float: right;
+    background: antiquewhite;
+    border: 3px solid #7b7b7b;
+
+}
+
 #div-box1       {
 
     position: relative;
     background-color: whitesmoke;
     /*float: inherit;*/
-    height: 45%;
+    height: 180px;
     width: 45%;
     float: left;
     border: 2px solid #2e3138;
-    padding: 20px;
+    /*padding: 20px;*/
     /*display: flex;*/
     display: inline-block;
     overflow: auto;
@@ -83,6 +83,23 @@ header    {
     float: right;
     border: 2px solid #2e3138;
     padding: 9px;
+    /*display: flex;*/
+    display: inline-block;
+    overflow: auto;
+
+}
+
+#div-status       {
+
+    position: relative;
+    background-color: whitesmoke;
+    /*float: inherit;*/
+    /*height: 40%;*/
+    width: 40%;
+    float: right;
+    border: 2px solid #2e3138;
+    padding: 9px;
+    /*margin: 2px;*/
     /*display: flex;*/
     display: inline-block;
     overflow: auto;
@@ -122,10 +139,31 @@ header    {
 
 }
 
+.head-button    {
+
+    width: 410px;
+
+}
+
+#jsp-send span {
+
+    padding: 10px 10px 10px 40px;
+    position: absolute;
+    text-decoration: none;
+
+}
+
+#jsp-send:hover  span   {
+
+    opacity: 1;
+    visibility: visible;
+
+}
+
 #view1   {
 
     /*position: fixed;*/
-    text-align: left;
+    text-align: center;
     width: 100%;
     margin: 0 auto;
 
@@ -134,9 +172,9 @@ header    {
 #view2   {
 
     /*position: fixed;*/
-    text-align: left;
+    text-align: center;
     width: 100%;
-    margin: 0 auto;
+    margin: 5px auto 0;
 
 }
 

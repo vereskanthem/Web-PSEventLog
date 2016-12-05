@@ -39,6 +39,9 @@
         <h3>----------------------------------------------------------</h3>
         <h4>Yo-ho-ho! And the bottle of Rum!</h4>
     </header>
+    <%--<nav>--%>
+        <%--<button id="nav-button1" class="head-button k-button"> Button to check Data Send through JAVA</button>--%>
+    <%--</nav>--%>
 </div>
 
 <%--<nav>--%>
@@ -49,110 +52,146 @@
 <%--</nav>--%>
 
 <div class="left-of-page k-content">
-<article>
+<%--<article>--%>
+
+    <div id="calendar-from-date"></div>
+    <div id="calendar-to-date"></div>
+
     <div class="example-inscriptions k-content"> <span color="red">INSERT into DB:</span>
         <ul>
-            <li>Set dates at the calendars</li>
-            <li>Set name in the textbox and click ADD button</li>
+            <li><b>SET DATES</b> at the calendars</li>
+            <li>Set <b>USERNAME</b> and <b>FILENAME</b> in the textboxes and <b>click ADD</b> button</li>
         </ul>
     </div>
 
     <div id="view1">
-        <input class="k-textbox" data-bind="value: name" />
-        <button class="k-button"  data-bind="click: addData">Add Dates and name to DB through Java</button>
+        <input onfocus="if (this.value=='Enter username please...') this.value = ''" onblur="if (this.value=='') this.value='Enter username please...'" class="k-textbox" id="add-username-textbox" data-bind="value: username" />
+        <input onfocus="if (this.value=='Enter filename please...') this.value = ''" onblur="if (this.value=='') this.value='Enter filename please...'" class="k-textbox" id="add-filename-textbox" data-bind="value: filename" />
+        <button class="k-button" id="jsp-send" data-bind="click: addData">Add Dates and name to DB through Java<span>SPANB!</span></button>
+    </div>
+
+    <div id="view2">
+        <button class="k-button" id="jsp-receive" data-bind="click: getData">SELECT data from DB through Java</button>
     </div>
 
     <div class="example-inscriptions k-content"> <span color="red">SELECT from DB:</span>
         <ul>
-            <li>Set date interval in calendars</li>
-            <li>Use GET Button to SELECT data from table in DB</li>
+            <li><b>Set DATES </b> in calendars</li>
+            <li>Set <b>USERNAME or FILENAME </b> in textboxes</li>
+            <li><b>Click SELECT Button</b> to GET data from table in DB</li>
         </ul>
     </div>
 
     <div id="view2" margin-bottom="20px">
-        <input class="k-textbox" data-bind="value: name" />
-        <button class="k-button" data-bind="click: getData">SELECT data from DB through Java</button>
-    </div>
 
-<div id="calendar-from-date"></div>
-<div id="calendar-to-date"></div>
+    </div>
 
 <script src="kendo/js/jquery.min.js"></script>
 <script src="kendo/js/kendo.all.min.js"></script>
 
 <%--<script> $("#datepicker").kendoDatePicker(); </script>--%>
 
-<input type="hidden" id="jsonData" name="jsonData"/>
+<%--<input type="hidden" id="jsonData" name="jsonData"/>--%>
+<%--<input type="hidden" id="test" name="test"/>--%>
 
 <script>
-
-    function convert_to_JSON(jsvar)  {
-
-        var jsonvar = JSON.stringify(jsvar)
-
-        return jsonvar
-    }
 
     <%-- Create the View-Model --%>
     var addDataToDB;
     addDataToDB = kendo.observable({
 
-        name: "Add name ...",
+        username: "Enter username please...",
+        filename: "Enter filename please...",
         addData: function () {
 
-            var ul = document.getElementById('commands');
-            var div = document.getElementById('div-box1');
+            var calendar;
+//            var name = this.get("name");
+            var firstDate;
+            var lastDate;
 
-            var name = this.get("name");
-            var node = document.createElement("li");
-            var br = document.createElement("br");
+            var username_textbox;
+            var filename_textbox;
 
-            var calendar = $("#calendar-from-date").data("kendoCalendar");
-            var firstDate = calendar.current();
+            var json_buffer;
 
-            var calendar = $("#calendar-to-date").data("kendoCalendar");
-            var lastDate = calendar.current();
+            calendar = $("#calendar-from-date").data("kendoCalendar");
+            firstDate = calendar.current();
 
-            var str = 'Try to ADD:';
-            var litextnode = document.createTextNode(str);
+            calendar = $("#calendar-to-date").data("kendoCalendar");
+            lastDate = calendar.current();
 
-            str = 'Name: ' + name;
-            var nametextNode = document.createTextNode(str);
+            username_textbox = $("#add-username-textbox").val();
+            filename_textbox = $("#add-filename-textbox").val();
 
-            str = 'Date Interval: ' + firstDate + ' - ' + lastDate;
-            var firstdateNode = document.createTextNode(str);
+            if(username_textbox == 'Enter username please...' || filename_textbox == 'Enter filename please...') {
 
-            var json_buffer =  {
+                if(username_textbox == 'Enter username please...') {
 
-                "name": name,
-                "firstDate": firstDate,
-                "lastDate": lastDate
+                    json_buffer = {
 
-            }
+                        username: "",
+                        filename: filename_textbox,
+                        firstDate: firstDate,
+                        lastDate: lastDate
 
-            var json = convert_to_JSON(json_buffer);
+                    };
 
-            if(json != null)    {
+                };
 
-                document.getElementById('jsonData').value = json;
+                if(filename_textbox == 'Enter filename please...') {
 
-                var div1 = document.getElementById('jsonData');
+                    json_buffer = {
 
-                $('#div-box2').html(document.getElementById('jsonData').value);
-                $('#div-box2').hide().fadeIn('fast');
-                $('#div-jsp').hide().fadeIn('fast');
+                        username: username_textbox,
+                        filename: "",
+                        firstDate: firstDate,
+                        lastDate: lastDate
 
-            }
+                    };
 
-//            $('#div-box2').load("request_out.jsp");
+                };
 
-            node.appendChild(litextnode);
+            };
 
-            ul.appendChild(node);
-            ul.appendChild(nametextNode);
-            ul.appendChild(br);
-            ul.appendChild(firstdateNode);
-            ul.appendChild(lastdateNode);
+            if((username_textbox == "" && filename_textbox == "") || (username_textbox == 'Enter username please...' && filename_textbox == 'Enter filename please...'))    {
+
+                alert("Username OR filename filed MUST be not null!");
+                throw new FatalError("Username OR filename filed MUST be not null!");
+
+            }   else {
+
+                 json_buffer = {
+
+                     username: username_textbox,
+                     filename: filename_textbox,
+                     firstDate: firstDate,
+                     lastDate: lastDate
+
+                 };
+
+            };
+
+            $('#div-box1').append("<br/>");
+            $('#div-box1').append("<font color=\"red\">Username:</font>" + json_buffer.username);
+            $('#div-box1').append("<br/>");
+            $('#div-box1').append("<font color=\"red\">Filename:</font>" + json_buffer.filename);
+            $('#div-box1').append("<br/>");
+            $('#div-box1').append("<font color=\"red\">FirstDate: </font>" + json_buffer.firstDate);
+            $('#div-box1').append("<br/>");
+            $('#div-box1').append("<font color=\"red\">LastDate:</font>" + json_buffer.lastDate);
+            $('#div-box1').append("<br/>");
+            $('#div-box1').append("--------------------------");
+
+            $('#div-box2').html(JSON.stringify(json_buffer));
+
+            $.post('Test', json_buffer, function (data) {
+                $('#div-jsp').html(data);
+            });
+
+            $('#div-jsp').hide().fadeIn('fast');
+
+//            To load another jsp
+//            $('#div-jsp').load("request_out.jsp");
 
         }
 
@@ -160,18 +199,9 @@
 
     var getDataFromDB = kendo.observable({
 
-        name: "Get name ... ",
+        name: "Enter username please...",
         getData: function () {
 
-        var name = this.get("name");
-        var ul = document.getElementById('commands');
-        var node = document.createElement("li");
-        var str = 'Try to GET ' + name;
-
-        var textnode = document.createTextNode(str);
-
-        node.appendChild(textnode);
-        ul.appendChild(node);
 
         }
 
@@ -186,7 +216,7 @@
         min: new Date(2016,7,1),
         max: new Date(2020,7,1),
         start: 'month',
-        value: new Date(2016,7,22),
+//        value: new Date(2016,7,22),
         change: function(e) {
 
             console.log(e)
@@ -198,13 +228,66 @@
         min: new Date(2016,7,1),
         max: new Date(2020,7,1),
         start: 'month',
-        value: new Date(2016,12,1),
+//        value: new Date(2016,12,1),
         change: function(e) {
 
             console.log(e)
 
         }
     });
+
+        $('#nav-button1').click(function () {
+
+            var JSONSrcArray;
+            var calendar;
+            var firstDate;
+            var lastDate;
+
+            calendar = $("#calendar-to-date").data("kendoCalendar");
+            firstDate = calendar.current();
+
+            calendar = $("#calendar-to-date").data("kendoCalendar");
+            lastDate = calendar.current();
+
+            JSONSrcArray = {
+
+                username:  $("#add-data-textbox").val(),
+                firstDate: firstDate,
+                lastDate: lastDate
+
+            };
+//            JSONSrcArray = { username: data };
+//            alert(JSONSrcArray.username);
+
+//            var JSONSerial = JSONStringArray.serialize();
+
+//            $.post('Test', { test: "testing!" }, function (data) {
+//                $('#div-jsp').html(data);
+//            });
+
+            $.post('Test', JSONSrcArray, function (data) {
+                $('#div-jsp').html(data);
+            });
+
+//            $.ajax({
+//
+//                type: "post",
+//                dataType: "json",
+//                data: JSONConverted,
+//                contentType: "application/json",
+//                url:  "/Test",
+//                success: function (data) {
+//
+//                    alert("Working well! Json: " + data);
+//                    $('#div-jsp').html(data);
+//
+//                },
+//                error: function () {
+//                    alert("Error! Cannot get response.");
+//                }
+//            });
+
+        });
 
 </script>
 
@@ -250,9 +333,39 @@
             <%--else            out.println("<font color=\"red\">JSP Out</font>");--%>
         <%--%>--%>
 
-        <%= (String)request.getAttribute("jsonData") %>
+        <%--<%--%>
+
+<%--//            (String)request.getAttribute("jsonData")--%>
+            <%--String testParam = request.getParameter("test");--%>
+
+            <%--if(testParam == null)   {--%>
+
+                <%--out.println("FUUUUUUU!");--%>
+
+            <%--}   else    {--%>
+
+                <%--out.println(testParam);--%>
+
+            <%--}--%>
+
+        <%--%>--%>
+        <%
+//            session.getAttribute("test")
+
+
+//            if(testParam == null) {
+
+              out.println("<font color=\"red\">JSP out</font>");
+
+//            }   else    {
+
+
+
+//            }
+
+        %>
     </div>
-    <%--<div id="div-box2" class="k-content">--%>
+    <%--<div id="div-status">STATUS</div>--%>
 
     <%--</div>--%>
 </div>

@@ -120,8 +120,31 @@
             calendar = $("#calendar-to-date").data("kendoCalendar");
             lastDate = calendar.current();
 
-            username_textbox = $("#add-username-textbox").val();
-            filename_textbox = $("#add-filename-textbox").val();
+//            username_textbox = $("#add-username-textbox").val();
+            username_textbox = this.get("username");
+//            filename_textbox = $("#add-filename-textbox").val();
+            filename_textbox = this.get("filename");
+
+//            alert("\"" + username_textbox + "\"");
+//            alert("\"" + filename_textbox + "\"");
+
+            if((username_textbox == "" && filename_textbox == "") || (username_textbox == 'Enter username please...' && filename_textbox == 'Enter filename please...'))    {
+
+                alert("Username OR filename filed MUST be not null!");
+                throw new FatalError("Username OR filename filed MUST be not null!");
+
+            }   else {
+
+                json_buffer = {
+
+                    username: username_textbox,
+                    filename: filename_textbox,
+                    firstDate: firstDate,
+                    lastDate: lastDate
+
+                };
+
+            };
 
             if(username_textbox == 'Enter username please...' || filename_textbox == 'Enter filename please...') {
 
@@ -150,24 +173,6 @@
                     };
 
                 };
-
-            };
-
-            if((username_textbox == "" && filename_textbox == "") || (username_textbox == 'Enter username please...' && filename_textbox == 'Enter filename please...'))    {
-
-                alert("Username OR filename filed MUST be not null!");
-                throw new FatalError("Username OR filename filed MUST be not null!");
-
-            }   else {
-
-                 json_buffer = {
-
-                     username: username_textbox,
-                     filename: filename_textbox,
-                     firstDate: firstDate,
-                     lastDate: lastDate
-
-                 };
 
             };
 
@@ -236,26 +241,26 @@
         }
     });
 
-        $('#nav-button1').click(function () {
-
-            var JSONSrcArray;
-            var calendar;
-            var firstDate;
-            var lastDate;
-
-            calendar = $("#calendar-to-date").data("kendoCalendar");
-            firstDate = calendar.current();
-
-            calendar = $("#calendar-to-date").data("kendoCalendar");
-            lastDate = calendar.current();
-
-            JSONSrcArray = {
-
-                username:  $("#add-data-textbox").val(),
-                firstDate: firstDate,
-                lastDate: lastDate
-
-            };
+//        $('#nav-button1').click(function () {
+//
+//            var JSONSrcArray;
+//            var calendar;
+//            var firstDate;
+//            var lastDate;
+//
+//            calendar = $("#calendar-to-date").data("kendoCalendar");
+//            firstDate = calendar.current();
+//
+//            calendar = $("#calendar-to-date").data("kendoCalendar");
+//            lastDate = calendar.current();
+//
+//            JSONSrcArray = {
+//
+//                username:  $("#add-data-textbox").val(),
+//                firstDate: firstDate,
+//                lastDate: lastDate
+//
+//            };
 //            JSONSrcArray = { username: data };
 //            alert(JSONSrcArray.username);
 
@@ -265,9 +270,9 @@
 //                $('#div-jsp').html(data);
 //            });
 
-            $.post('Test', JSONSrcArray, function (data) {
-                $('#div-jsp').html(data);
-            });
+//            $.post('Test', JSONSrcArray, function (data) {
+//                $('#div-jsp').html(data);
+//            });
 
 //            $.ajax({
 //
@@ -287,7 +292,7 @@
 //                }
 //            });
 
-        });
+//        });
 
 </script>
 
@@ -304,7 +309,7 @@
     <%--.....--%>
     <%--.....--%>
     <div id="div-box1" class="k-content">
-        <font color="gray">Transactions:</font>
+        <%--<font color="gray">Transactions:</font>--%>
         <ul id="commands">
 
         </ul>

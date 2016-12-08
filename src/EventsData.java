@@ -25,4 +25,22 @@ public class EventsData {
 
     }
 
+    public String getUsername() {
+
+        return this.username;
+
+    }
+
+    public String getFilename() {
+
+        return this.filename;
+
+    }
+
+    public String getEventDate()    {
+
+        return this.eventDate;
+
+    }
+
 }

@@ -9,7 +9,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static java.lang.System.out;
 
@@ -26,11 +28,22 @@ public class Test extends HttpServlet {
         String firstDateParam = request.getParameter("firstDate");
         String lastDateParam = request.getParameter("lastDate");
 
-        List<String> listOfStrings = new ArrayList<String>();
-        listOfStrings.add(usernameParam);
-        listOfStrings.add(filenameParam);
-        listOfStrings.add(firstDateParam);
-        listOfStrings.add(lastDateParam);
+        EventsData selectParametres = new EventsData();
+
+        Map<EventsData,Integer> listOfEvents = new HashMap<>();
+        Map<EventsData,Integer> searchEvent = new HashMap<>();
+
+        DBConnect
+
+//        List<String> listOfStrings = new ArrayList<String>();
+//        listOfStrings.add(usernameParam);
+//        listOfStrings.add(filenameParam);
+//        listOfStrings.add(firstDateParam);
+//        listOfStrings.add(lastDateParam);
+
+        listOfEvents.put(listOfEvents);
+
+        listOfEvents.setUsername(usernameParam);
 
         Gson gson = new Gson();
 

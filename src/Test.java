@@ -28,22 +28,48 @@ public class Test extends HttpServlet {
         String firstDateParam = request.getParameter("firstDate");
         String lastDateParam = request.getParameter("lastDate");
 
+        String connectionSuccess;
+
         EventsData selectParametres = new EventsData();
 
         Map<EventsData,Integer> listOfEvents = new HashMap<>();
         Map<EventsData,Integer> searchEvent = new HashMap<>();
 
-        DBConnect
+        DBConnect dbConnection = new DBConnect();
 
-//        List<String> listOfStrings = new ArrayList<String>();
-//        listOfStrings.add(usernameParam);
-//        listOfStrings.add(filenameParam);
-//        listOfStrings.add(firstDateParam);
-//        listOfStrings.add(lastDateParam);
+        dbConnection.setConnectionURL("jdbc:oracle:thin:@localhost:1521:orcl");
+        dbConnection.setConnectionUsername("system");
+        dbConnection.setConnectionPassword("1");
 
-        listOfEvents.put(listOfEvents);
+        dbConnection.connectToDB();
 
-        listOfEvents.setUsername(usernameParam);
+        List<String> listOfStrings = new ArrayList<String>();
+        listOfStrings.add(usernameParam);
+        listOfStrings.add(filenameParam);
+        listOfStrings.add(firstDateParam);
+        listOfStrings.add(lastDateParam);
+        listOfStrings.add(lastDateParam);
+
+        if(dbConnection.getStatusConnection() == 0) {
+
+            listOfStrings.add("::connected!");
+
+        }   else {
+
+            listOfStrings.add("::NOT connected!");
+
+        }
+
+        if(dbConnection.getOracleConnectClassExist() == 0)  {
+
+            listOfStrings.add("::Class EXIST!");
+
+        }   else    {
+
+            listOfStrings.add("::Class NOT Exist!");
+
+        }
+//        listOfEvents.put(listOfEvents);
 
         Gson gson = new Gson();
 

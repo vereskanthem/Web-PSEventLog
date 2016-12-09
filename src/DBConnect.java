@@ -100,11 +100,11 @@ public class DBConnect {
 
         }
 
-        try {
-            Driver oracleDriver = new oracle.jdbc.driver.OracleDriver();
-        }   catch (ClassNotFoundException e)    {
-            System.out.println();
-        }
+//        try {
+//            Driver oracleDriver = new oracle.jdbc.driver.OracleDriver();
+//        }   catch (ClassNotFoundException e)    {
+//            System.out.println();
+//        }
 
         Connection connection = null;
 

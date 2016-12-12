@@ -59,7 +59,7 @@
 
     <div class="example-inscriptions k-content"> <span color="red">INSERT into DB:</span>
         <ul>
-            <li><b>SET DATES</b> at the calendars</li>
+            <li><b>SET DATE</b> at first calendar</li>
             <li>Set <b>USERNAME</b> and <b>FILENAME</b> in the textboxes and <b>click ADD</b> button</li>
         </ul>
     </div>

@@ -1,4 +1,3 @@
-
 import com.google.gson.Gson;
 
 import javax.servlet.ServletException;
@@ -8,10 +7,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.sql.SQLException;
+//import java.sql.Date;
+import java.text.ParseException;
+import java.util.*;
 
 import static java.lang.System.out;
 
@@ -21,6 +20,28 @@ import static java.lang.System.out;
 //@WebServlet(name = "/Test")
 public class Test extends HttpServlet {
 
+    private String selectedUsername;
+    private String selectedFilename;
+    private String selectedTimeEvent;
+
+    public void setSelectedUsername(String selectedUsername)   {
+
+        this.selectedUsername = selectedUsername;
+
+    }
+
+    public void setSelectedFilename(String selectedFilename)   {
+
+        this.selectedFilename = selectedFilename;
+
+    }
+
+    public void setSelectedTimeEvent(String selectedTimeEvent)   {
+
+        this.selectedTimeEvent = selectedTimeEvent;
+
+    }
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         String usernameParam = request.getParameter("username");
@@ -28,22 +49,50 @@ public class Test extends HttpServlet {
         String firstDateParam = request.getParameter("firstDate");
         String lastDateParam = request.getParameter("lastDate");
 
+        Date firstDate = new Date();
+        Date lastDate = new Date();
+
+        try {
+
+            firstDate = ISO8601DateParser.parse(firstDateParam);
+            lastDate =  ISO8601DateParser.parse(lastDateParam);
+
+        } catch (ParseException e) {
+
+            e.printStackTrace();
+
+        }
+
         String connectionSuccess;
 
-        EventsData selectParametres = new EventsData();
+        EventsData selectedParametres = new EventsData();
 
-        Map<EventsData,Integer> listOfEvents = new HashMap<>();
-        Map<EventsData,Integer> searchEvent = new HashMap<>();
+        List<String> listOfStrings = new ArrayList<String>();
+
+        // Get data from DB
+//        selectedParametres.setUsername(selectedUsername);
+//        selectedParametres.setFilename(selectedFilename);
+//        selectedParametres.setEventTime(selectedTimeEvent);
+
+//        Map<EventsData,Integer> listOfEvents = new HashMap<>();
+//        Map<EventsData,Integer> searchEvent = new HashMap<>();
 
         DBConnect dbConnection = new DBConnect();
 
-        dbConnection.setConnectionURL("jdbc:oracle:thin:@localhost:1521:orcl");
-        dbConnection.setConnectionUsername("system");
-        dbConnection.setConnectionPassword("1");
-
         dbConnection.connectToDB();
 
-        List<String> listOfStrings = new ArrayList<String>();
+        try {
+
+//            dbConnection.selectFromDatabase(firstDateParam,lastDateParam);
+            dbConnection.addToDatabase(usernameParam,filenameParam,firstDate);
+
+        } catch (SQLException e) {
+
+            listOfStrings.add("|| Cannot Add! || ");
+            e.printStackTrace();
+
+        }
+
         listOfStrings.add(usernameParam);
         listOfStrings.add(filenameParam);
         listOfStrings.add(firstDateParam);
@@ -93,4 +142,5 @@ public class Test extends HttpServlet {
 
 
     }
+
 }

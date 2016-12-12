@@ -2,11 +2,10 @@
  * Created by nlare on 08.12.16.
  */
 
-//import java.sql.DriverManager;
-//import java.sql.Connection;
-//import java.sql.SQLException;
-
 import java.sql.*;
+import java.util.*;
+
+//import java.sql.*;
 
 public class DBConnect {
 
@@ -16,6 +15,11 @@ public class DBConnect {
 
     private int statusConnection;
     private int oracleConnectClassExist;
+    private Connection connection = null;
+
+    EventsData data = new EventsData();
+
+//    List<EventsData> dataList = new List<EventsData>();
 
     public void setConnectionURL(String connectionURL) {
 
@@ -100,14 +104,6 @@ public class DBConnect {
 
         }
 
-//        try {
-//            Driver oracleDriver = new oracle.jdbc.driver.OracleDriver();
-//        }   catch (ClassNotFoundException e)    {
-//            System.out.println();
-//        }
-
-        Connection connection = null;
-
         try {
 
 //            connection = DriverManager.getConnection(connectionURL,connectionUsername,connectionPassword);
@@ -117,29 +113,56 @@ public class DBConnect {
 
             System.out.println("Error in getConnection!");
 
+        }
+
+        if(connection == null)  {
+
+            System.out.println("Cannot connect to the current URL!");
+
             setStatusConnection(1);
 
+        }   else    {
+
+            System.out.println("Connected!");
+
+            setStatusConnection(0);
+
         }
-//
-//        if(connection == null)  {
-//
-//            System.out.println("Cannot connect to the current URL!");
-//
-//            setStatusConnection(1);
-//
-//        }   else    {
-//
-//            System.out.println("Connected!");
-//
-//            setStatusConnection(0);
-//
-//        }
 
         return 0;
 
     }
 
-    public int addToDatabase(String username, String filename, String firstDate, String lastDate) {
+    public int addToDatabase(String username, String filename, java.util.Date eventdate) throws SQLException {
+
+        Statement st = connection.createStatement();
+
+        java.sql.Date sqlDate = new java.sql.Date(eventdate.getTime());
+
+        st.executeUpdate("INSERT into PSEVENTLOG.EventsLog (USERNAME,FILENAME,TIME_EVENT)" + " VALUES (" + username + "," + filename + "," + sqlDate + ")");
+
+        return 0;
+
+    }
+
+    public int selectFromDatabase(String firstTime, String lastTime) throws SQLException {
+
+        Statement st = connection.createStatement();
+
+        String sql = "SELECT ID_EVENT,USERNAME,FILENAME,TIME_EVENT from PSEVENTLOG.EVENTSLOG";
+
+        ResultSet selectResult = st.executeQuery(sql);
+
+        while(selectResult.next())  {
+
+            int id_event  = selectResult.getInt("ID_EVENT");
+            String username = selectResult.getString("USERNAME");
+            String filename = selectResult.getString("FILENAME");
+            String time_event = selectResult.getString("TIME_EVENT");
+
+        }
+
+        selectResult.close();
 
         return 0;
 

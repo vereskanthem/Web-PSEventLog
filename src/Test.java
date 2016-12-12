@@ -44,10 +44,10 @@ public class Test extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        String usernameParam = request.getParameter("username");
-        String filenameParam = request.getParameter("filename");
+        String usernameParam  = request.getParameter("username");
+        String filenameParam  = request.getParameter("filename");
         String firstDateParam = request.getParameter("firstDate");
-        String lastDateParam = request.getParameter("lastDate");
+        String lastDateParam  = request.getParameter("lastDate");
 
         Date firstDate = new Date();
         Date lastDate = new Date();

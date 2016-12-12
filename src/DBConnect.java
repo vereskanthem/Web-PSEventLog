@@ -138,8 +138,11 @@ public class DBConnect {
         Statement st = connection.createStatement();
 
         java.sql.Date sqlDate = new java.sql.Date(eventdate.getTime());
+        // Need correction of datatype!
+        st.executeUpdate("INSERT into PSEVENTLOG.EventsLog (USERNAME,FILENAME,TIME_EVENT)" + " VALUES ('" + username + "','" + filename + "', to_date('" + sqlDate + "', 'yyyy/mm/dd hh24:mi:ss'))");
+//        st.executeUpdate("INSERT into PSEVENTLOG.EventsLog (USERNAME,FILENAME,TIME_EVENT) VALUES ('testuser2','testfile2',null)");
 
-        st.executeUpdate("INSERT into PSEVENTLOG.EventsLog (USERNAME,FILENAME,TIME_EVENT)" + " VALUES (" + username + "," + filename + "," + sqlDate + ")");
+        st.close();
 
         return 0;
 
@@ -160,8 +163,11 @@ public class DBConnect {
             String filename = selectResult.getString("FILENAME");
             String time_event = selectResult.getString("TIME_EVENT");
 
+
+
         }
 
+        st.close();
         selectResult.close();
 
         return 0;

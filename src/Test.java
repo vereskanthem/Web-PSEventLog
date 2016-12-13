@@ -9,7 +9,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 //import java.sql.Date;
+import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 import static java.lang.System.out;
@@ -23,6 +25,7 @@ public class Test extends HttpServlet {
     private String selectedUsername;
     private String selectedFilename;
     private String selectedTimeEvent;
+
 
     public void setSelectedUsername(String selectedUsername)   {
 
@@ -49,33 +52,11 @@ public class Test extends HttpServlet {
         String firstDateParam = request.getParameter("firstDate");
         String lastDateParam  = request.getParameter("lastDate");
 
-        Date firstDate = new Date();
-        Date lastDate = new Date();
-
-        try {
-
-            firstDate = ISO8601DateParser.parse(firstDateParam);
-            lastDate =  ISO8601DateParser.parse(lastDateParam);
-
-        } catch (ParseException e) {
-
-            e.printStackTrace();
-
-        }
-
         String connectionSuccess;
 
         EventsData selectedParametres = new EventsData();
 
         List<String> listOfStrings = new ArrayList<String>();
-
-        // Get data from DB
-//        selectedParametres.setUsername(selectedUsername);
-//        selectedParametres.setFilename(selectedFilename);
-//        selectedParametres.setEventTime(selectedTimeEvent);
-
-//        Map<EventsData,Integer> listOfEvents = new HashMap<>();
-//        Map<EventsData,Integer> searchEvent = new HashMap<>();
 
         DBConnect dbConnection = new DBConnect();
 
@@ -84,20 +65,23 @@ public class Test extends HttpServlet {
         try {
 
 //            dbConnection.selectFromDatabase(firstDateParam,lastDateParam);
-            dbConnection.addToDatabase(usernameParam,filenameParam,firstDate);
+            dbConnection.addToDatabase(usernameParam, filenameParam, firstDateParam);
 
         } catch (SQLException e) {
 
             listOfStrings.add("|| Cannot Add! || ");
             e.printStackTrace();
 
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
 
         listOfStrings.add(usernameParam);
         listOfStrings.add(filenameParam);
+//        listOfStrings.add(firstDate);
         listOfStrings.add(firstDateParam);
         listOfStrings.add(lastDateParam);
-        listOfStrings.add(lastDateParam);
+//        listOfStrings.add(lastDateParam);
 
         if(dbConnection.getStatusConnection() == 0) {
 

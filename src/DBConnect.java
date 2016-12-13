@@ -3,7 +3,11 @@
  */
 
 import java.sql.*;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.Date;
 
 //import java.sql.*;
 
@@ -133,13 +137,19 @@ public class DBConnect {
 
     }
 
-    public int addToDatabase(String username, String filename, java.util.Date eventdate) throws SQLException {
+    public int addToDatabase(String username, String filename, String eventdate) throws SQLException, ParseException {
 
         Statement st = connection.createStatement();
 
-        java.sql.Date sqlDate = new java.sql.Date(eventdate.getTime());
+        String timeTest = "Tue Dec 01 2016 00:00:00 GMT+0600 (+06)";
+        DateFormat formatter = new SimpleDateFormat("EEE MMM dd yyyy HH:mm:ss 'GMT'Z '('Z')'");
+
+        Date currentDate = formatter.parse(timeTest);
+
+        java.sql.Date sqlDate = new java.sql.Date(currentDate.getTime());
+
         // Need correction of datatype!
-        st.executeUpdate("INSERT into PSEVENTLOG.EventsLog (USERNAME,FILENAME,TIME_EVENT)" + " VALUES ('" + username + "','" + filename + "', to_date('" + sqlDate + "', 'yyyy/mm/dd hh24:mi:ss'))");
+        st.executeUpdate("INSERT into PSEVENTLOG.EventsLog (USERNAME,FILENAME,TIME_EVENT)" + " VALUES ('" + username + "','" + filename + "', to_date('" + sqlDate + "', 'yyyy/mm/dd hh:mi:ss'))");
 //        st.executeUpdate("INSERT into PSEVENTLOG.EventsLog (USERNAME,FILENAME,TIME_EVENT) VALUES ('testuser2','testfile2',null)");
 
         st.close();

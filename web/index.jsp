@@ -115,10 +115,12 @@
             var json_buffer;
 
             calendar = $("#calendar-from-date").data("kendoCalendar");
-            firstDate = calendar.current();
+            // .getTime() - get time in milliseconds
+            firstDate = calendar.current().getTime();
 
             calendar = $("#calendar-to-date").data("kendoCalendar");
-            lastDate = calendar.current();
+            // .getTime() - get time in milliseconds
+            lastDate = calendar.current().getTime();
 
 //            username_textbox = $("#add-username-textbox").val();
             username_textbox = this.get("username");

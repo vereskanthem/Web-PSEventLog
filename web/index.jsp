@@ -1,3 +1,4 @@
+<%--suppress ALL --%>
 <%@ page import="org.json.simple.JSONObject" %>
 <%@ page import="org.json.simple.JSONValue" %>
 <%@ page import="static java.lang.Math.random" %>
@@ -71,6 +72,8 @@
     </div>
 
     <div id="view2">
+        <input onfocus="if (this.value=='Enter username please...') this.value = ''" onblur="if (this.value=='') this.value='Enter username please...'" class="k-textbox" id="get-username-textbox" data-bind="value: username" />
+        <input onfocus="if (this.value=='Enter filename please...') this.value = ''" onblur="if (this.value=='') this.value='Enter filename please...'" class="k-textbox" id="get-filename-textbox" data-bind="value: filename" />
         <button class="k-button" id="jsp-receive" data-bind="click: getData">SELECT data from DB through Java</button>
     </div>
 
@@ -91,8 +94,8 @@
 
 <%--<script> $("#datepicker").kendoDatePicker(); </script>--%>
 
-<%--<input type="hidden" id="jsonData" name="jsonData"/>--%>
-<%--<input type="hidden" id="test" name="test"/>--%>
+    <input type="hidden" id="jsonData" name="jsonData"/>
+    <input type="hidden" id="test" name="test"/>
 
 <script>
 
@@ -126,6 +129,8 @@
             username_textbox = this.get("username");
 //            filename_textbox = $("#add-filename-textbox").val();
             filename_textbox = this.get("filename");
+
+
 
 //            alert("\"" + username_textbox + "\"");
 //            alert("\"" + filename_textbox + "\"");
@@ -178,24 +183,24 @@
 
             };
 
-            $('#div-box1').append("<br/>");
-            $('#div-box1').append("<font color=\"red\">Username:</font>" + json_buffer.username);
-            $('#div-box1').append("<br/>");
-            $('#div-box1').append("<font color=\"red\">Filename:</font>" + json_buffer.filename);
-            $('#div-box1').append("<br/>");
-            $('#div-box1').append("<font color=\"red\">FirstDate: </font>" + json_buffer.firstDate);
-            $('#div-box1').append("<br/>");
-            $('#div-box1').append("<font color=\"red\">LastDate:</font>" + json_buffer.lastDate);
-            $('#div-box1').append("<br/>");
-            $('#div-box1').append("--------------------------");
+            $('#div-clean-output').append("<br/>");
+            $('#div-clean-output').append("<font color=\"red\">Username:</font>" + json_buffer.username);
+            $('#div-clean-output').append("<br/>");
+            $('#div-clean-output').append("<font color=\"red\">Filename:</font>" + json_buffer.filename);
+            $('#div-clean-output').append("<br/>");
+            $('#div-clean-output').append("<font color=\"red\">FirstDate: </font>" + json_buffer.firstDate);
+            $('#div-clean-output').append("<br/>");
+            $('#div-clean-output').append("<font color=\"red\">LastDate:</font>" + json_buffer.lastDate);
+            $('#div-clean-output').append("<br/>");
+            $('#div-clean-output').append("--------------------------");
 
-            $('#div-box2').html(JSON.stringify(json_buffer));
+            $('#div-json-from-js').html(JSON.stringify(json_buffer));
 
-            $.post('Test', json_buffer, function (data) {
-                $('#div-jsp').html(data);
+            $.post('AddToDB', json_buffer, function (data) {
+                $('#div-jsp-out').html(data);
             });
 
-            $('#div-jsp').hide().fadeIn('fast');
+            $('#div-jsp-out').hide().fadeIn('fast');
 
 //            To load another jsp
 //            $('#div-jsp').load("request_out.jsp");
@@ -206,9 +211,96 @@
 
     var getDataFromDB = kendo.observable({
 
-        name: "Enter username please...",
+        username: "Enter username please...",
+        filename: "Enter filename please...",
         getData: function () {
 
+            var calendar;
+            var firstDate;
+            var lastDate;
+
+            var username_textbox;
+            var filename_textbox;
+
+            var json_buffer;
+
+            calendar = $("#calendar-from-date").data("kendoCalendar");
+            // .getTime() - get time in milliseconds
+            firstDate = calendar.current().getTime();
+
+            calendar = $("#calendar-to-date").data("kendoCalendar");
+            // .getTime() - get time in milliseconds
+            lastDate = calendar.current().getTime();
+
+//            username_textbox = $("#get-username-textbox").val();
+            username_textbox = this.get("username");
+//            filename_textbox = $("#get-filename-textbox").val();
+            filename_textbox = this.get("filename");
+
+            if((username_textbox == "" && filename_textbox == "") || (username_textbox == 'Enter username please...' && filename_textbox == 'Enter filename please...'))    {
+
+                alert("Setting up username and filename like empty string!");
+
+                json_buffer = {
+
+                    username: "",
+                    filename: "",
+                    firstDate: firstDate,
+                    lastDate: lastDate
+
+                };
+
+                throw new FatalError("Username OR filename filed MUST be not null!");
+
+            }   else {
+
+                json_buffer = {
+
+                    username: username_textbox,
+                    filename: filename_textbox,
+                    firstDate: firstDate,
+                    lastDate: lastDate
+
+                };
+
+            };
+
+            if(username_textbox == 'Enter username please...' || filename_textbox == 'Enter filename please...') {
+
+                if(username_textbox == 'Enter username please...') {
+
+                    json_buffer = {
+
+                        username: "",
+                        filename: filename_textbox,
+                        firstDate: firstDate,
+                        lastDate: lastDate
+
+                    };
+
+                };
+
+                if(filename_textbox == 'Enter filename please...') {
+
+                    json_buffer = {
+
+                        username: username_textbox,
+                        filename: "",
+                        firstDate: firstDate,
+                        lastDate: lastDate
+
+                    };
+
+                };
+
+            };
+
+            $.post('AddToDB', function (data) {
+                $("#jsonData").attr('jsonData', data);
+
+            });
+//
+//            $('#div-jsp-out').hide().fadeIn('fast');
 
         }
 
@@ -268,11 +360,11 @@
 
 //            var JSONSerial = JSONStringArray.serialize();
 
-//            $.post('Test', { test: "testing!" }, function (data) {
+//            $.post('AddToDB', { test: "testing!" }, function (data) {
 //                $('#div-jsp').html(data);
 //            });
 
-//            $.post('Test', JSONSrcArray, function (data) {
+//            $.post('AddToDB', JSONSrcArray, function (data) {
 //                $('#div-jsp').html(data);
 //            });
 
@@ -282,7 +374,7 @@
 //                dataType: "json",
 //                data: JSONConverted,
 //                contentType: "application/json",
-//                url:  "/Test",
+//                url:  "/AddToDB",
 //                success: function (data) {
 //
 //                    alert("Working well! Json: " + data);
@@ -300,25 +392,23 @@
 
 </article>
 </div>
-<div class="example-inscriptions k-content"> Output of JS/JAVA+DB: </div>
-<div class="right-of-page k-content">
+<div class="right-of-page">
+<div id="div-head-iscription" class="k-content"> Output of JS/JAVA+DB: </div>
+<%--<div class="k-content">--%>
 
-    <div class="div-inside-right-of-page k-content"></div>
+    <%--<div class="div-inside-right-of-page k-content"></div>--%>
 
     <%--Same text.--%>
     <%--..... <br>--%>
     <%--.....--%>
     <%--.....--%>
     <%--.....--%>
-    <div id="div-box1" class="k-content">
-        <%--<font color="gray">Transactions:</font>--%>
-        <ul id="commands">
+<div id="div-clean-output" class="k-content">
+    <font color="gray">Transactions:</font>
+</div>
 
-        </ul>
-    </div>
-
-    <div id="div-box2" class="k-content">
-        <font color="#b0c4de">JSON Out</font>
+<div id="div-json-from-js" class="k-content">
+        <font color="#b0c4de">JSON Out !</font>
         <%--<%--%>
 
             <%--Random rand;--%>
@@ -332,8 +422,8 @@
             <%--}--%>
             <%----%>
         <%--%>--%>
-    </div>
-    <div id="div-jsp" class="k-content">
+</div>
+    <div id="div-jsp-out" class="k-content">
         <%--<%--%>
             <%--String req = request.getParameter("jsonData");--%>
             <%--if(req != null) out.println(req);--%>
@@ -362,7 +452,7 @@
 
 //            if(testParam == null) {
 
-              out.println("<font color=\"red\">JSP out</font>");
+              out.println("<font color=\"red\">JSP out !</font>");
 
 //            }   else    {
 
@@ -375,6 +465,31 @@
     <%--<div id="div-status">STATUS</div>--%>
 
     <%--</div>--%>
+</div>
+
+<div id="db-out" class="k-content">
+
+    <table id="events-list">
+        <thead>
+            <tr>
+                <th>ID_EVENT</th>
+                <th>USERNAME</th>
+                <th>FILENAME</th>
+                <th>EVENT_DATE</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <%--<td colspan="4"></td>--%>
+                <th>ololo</th>
+                <th>ololo</th>
+                <th>ololo</th>
+                <th>ololo</th>
+            </tr>
+        </tbody>
+    </table>
+
 </div>
 
 </body>

@@ -19,31 +19,8 @@ import static java.lang.System.out;
 /**
  * Created by nlare on 30.11.16.
  */
-//@WebServlet(name = "/Test")
-public class Test extends HttpServlet {
-
-    private String selectedUsername;
-    private String selectedFilename;
-    private String selectedTimeEvent;
-
-
-    public void setSelectedUsername(String selectedUsername)   {
-
-        this.selectedUsername = selectedUsername;
-
-    }
-
-    public void setSelectedFilename(String selectedFilename)   {
-
-        this.selectedFilename = selectedFilename;
-
-    }
-
-    public void setSelectedTimeEvent(String selectedTimeEvent)   {
-
-        this.selectedTimeEvent = selectedTimeEvent;
-
-    }
+//@WebServlet(name = "/AddToDB")
+public class AddToDB extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

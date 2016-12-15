@@ -176,8 +176,6 @@ public class DBConnect {
             String filename = selectResult.getString("FILENAME");
             String time_event = selectResult.getString("TIME_EVENT");
 
-
-
         }
 
         st.close();

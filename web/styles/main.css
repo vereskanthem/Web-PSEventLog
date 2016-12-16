@@ -26,6 +26,12 @@ header    {
 
 }
 
+.k-button   {
+
+    min-width: 65%;
+
+}
+
 .right-of-page   {
 
     /*margin-right: 10px;*/
@@ -229,12 +235,6 @@ header    {
 #commands   {
 
     color: slategray;
-
-}
-
-.k-button   {
-
-    min-width: 410px;
 
 }
 

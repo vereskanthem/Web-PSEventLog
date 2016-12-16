@@ -52,7 +52,7 @@ public class DBConnect {
 
     }
 
-    private void setOracleConnectClassExist(int classExist)  {
+    private void setOracleConnectClassExist(int oracleConnectClassExist)  {
 
         this.oracleConnectClassExist = oracleConnectClassExist;
 
@@ -161,10 +161,22 @@ public class DBConnect {
 
     }
 
-    public int selectFromDatabase(String firstTime, String lastTime) throws SQLException {
+    public int selectFromDatabase(String _username, String _filename, String firstTime, String lastTime) throws SQLException, NullTimeStringException {
+
+        String sqlFirstTime, sqlLastTime;
 
         Statement st = connection.createStatement();
 
+        EventsDataCollection collection = new EventsDataCollection();
+        DateConverter converter = new DateConverter();
+
+        if(firstTime.equals("")) throw new NullTimeStringException("Begin of Time Interval is NULL!");
+        if(lastTime.equals("")) throw new NullTimeStringException("End of Time Interval is NULL!");
+
+        sqlFirstTime = converter.ConvertMillisecToSQLDateString(firstTime);
+        sqlLastTime = converter.ConvertMillisecToSQLDateString(lastTime);
+
+        // Need to add where statement
         String sql = "SELECT ID_EVENT,USERNAME,FILENAME,TIME_EVENT from PSEVENTLOG.EVENTSLOG";
 
         ResultSet selectResult = st.executeQuery(sql);
@@ -175,6 +187,8 @@ public class DBConnect {
             String username = selectResult.getString("USERNAME");
             String filename = selectResult.getString("FILENAME");
             String time_event = selectResult.getString("TIME_EVENT");
+
+            collection.addToCollection(username,filename,time_event);
 
         }
 

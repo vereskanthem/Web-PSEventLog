@@ -294,13 +294,31 @@
                 };
 
             };
+//
+//            var dataSource = new kendo.data.DataSource({
+//
+//                type: "odata",
+//                serverFiltering: true,
+//                serverPaging: true,
+//                serverSorting: true,
+//                pageSize: 10,
+//                transport: {
+//                    read: {
+//                        cache: false,
+//                        url: 'GetFromDB',
+//                    }
+//                },
+//
+//
+//
+//            });
 
-            $.post('AddToDB', function (data) {
-                $("#jsonData").attr('jsonData', data);
+            $.post('GetFromDB', function (data) {
+                $('#db-out').html(data);
 
             });
 //
-//            $('#div-jsp-out').hide().fadeIn('fast');
+            $('#db-out').hide().fadeIn('fast');
 
         }
 
@@ -308,6 +326,8 @@
 
     kendo.bind($('#view1'), addDataToDB);
     kendo.bind($('#view2'), getDataFromDB);
+
+
 
     <%-- --------------------- --%>
 
@@ -469,26 +489,26 @@
 
 <div id="db-out" class="k-content">
 
-    <table id="events-list">
-        <thead>
-            <tr>
-                <th>ID_EVENT</th>
-                <th>USERNAME</th>
-                <th>FILENAME</th>
-                <th>EVENT_DATE</th>
-            </tr>
-        </thead>
+    <%--<table id="events-list">--%>
+        <%--<thead>--%>
+            <%--<tr>--%>
+                <%--<th>ID_EVENT</th>--%>
+                <%--<th>USERNAME</th>--%>
+                <%--<th>FILENAME</th>--%>
+                <%--<th>EVENT_DATE</th>--%>
+            <%--</tr>--%>
+        <%--</thead>--%>
 
-        <tbody>
-            <tr>
-                <%--<td colspan="4"></td>--%>
-                <th>ololo</th>
-                <th>ololo</th>
-                <th>ololo</th>
-                <th>ololo</th>
-            </tr>
-        </tbody>
-    </table>
+        <%--<tbody>--%>
+            <%--<tr>--%>
+                <%--&lt;%&ndash;<td colspan="4"></td>&ndash;%&gt;--%>
+                <%--<th>ololo</th>--%>
+                <%--<th>ololo</th>--%>
+                <%--<th>ololo</th>--%>
+                <%--<th>ololo</th>--%>
+            <%--</tr>--%>
+        <%--</tbody>--%>
+    <%--</table>--%>
 
 </div>
 

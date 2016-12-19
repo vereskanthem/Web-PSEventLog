@@ -1,9 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="exploded-ejb" name="Web-PSEventLog:ejb exploded">
-    <output-path>$PROJECT_DIR$/out/artifacts/Web_PSEventLog_ejb_exploded</output-path>
-    <root id="root">
-      <element id="module-output" name="Web-PSEventLog" />
-      <element id="artifact" artifact-name="Web-PSEventLog:war exploded" />
-    </root>
-  </artifact>
-</component>

@@ -3,15 +3,9 @@
  */
 
 import java.sql.*;
-import java.text.DateFormat;
+import java.sql.Date;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
-import java.util.Date;
 
 //import java.sql.*;
 
@@ -161,41 +155,50 @@ public class DBConnect {
 
     }
 
-    public int selectFromDatabase(String _username, String _filename, String firstTime, String lastTime) throws SQLException, NullTimeStringException {
-
-        String sqlFirstTime, sqlLastTime;
+    public List<EventsData> getListFromDatabase(String _username, String _filename, String firstTime, String lastTime) throws SQLException, NullTimeStringException {
 
         Statement st = connection.createStatement();
 
-        EventsDataCollection collection = new EventsDataCollection();
-        DateConverter converter = new DateConverter();
+        int columnsCount;
 
-        if(firstTime.equals("")) throw new NullTimeStringException("Begin of Time Interval is NULL!");
-        if(lastTime.equals("")) throw new NullTimeStringException("End of Time Interval is NULL!");
+//        EventsDataCollection collection = new EventsDataCollection();
 
-        sqlFirstTime = converter.ConvertMillisecToSQLDateString(firstTime);
-        sqlLastTime = converter.ConvertMillisecToSQLDateString(lastTime);
+        EventsData eventData = new EventsData();
+        List<EventsData> eventsDataArray = new ArrayList<>();
+
+//        DateConverter converter = new DateConverter();
+
+//        if(firstTime.equals("")) throw new NullTimeStringException("Begin of Time Interval is NULL!");
+//        if(lastTime.equals("")) throw new NullTimeStringException("End of Time Interval is NULL!");
+
+//        sqlFirstTime = converter.ConvertMillisecToSQLDateString(firstTime);
+//        sqlLastTime = converter.ConvertMillisecToSQLDateString(lastTime);
 
         // Need to add where statement
-        String sql = "SELECT ID_EVENT,USERNAME,FILENAME,TIME_EVENT from PSEVENTLOG.EVENTSLOG";
+        String sql = "SELECT USERNAME,FILENAME,TIME_EVENT from PSEVENTLOG.EVENTSLOG";
 
         ResultSet selectResult = st.executeQuery(sql);
 
-        while(selectResult.next())  {
+//        columnsCount = selectResult.getMetaData().getColumnCount();
 
-            int id_event  = selectResult.getInt("ID_EVENT");
+        while (selectResult.next()) {
+
             String username = selectResult.getString("USERNAME");
             String filename = selectResult.getString("FILENAME");
-            String time_event = selectResult.getString("TIME_EVENT");
+            Date time_event = selectResult.getDate("TIME_EVENT");
 
-            collection.addToCollection(username,filename,time_event);
+            eventData.setUsername(username);
+            eventData.setFilename(filename);
+            eventData.setEventTime(time_event);
+
+            eventsDataArray.add(eventData);
 
         }
 
-        st.close();
         selectResult.close();
+        st.close();
 
-        return 0;
+        return eventsDataArray;
 
     }
 

@@ -1,3 +1,5 @@
+import java.util.Date;
+
 /**
  * Created by nlare on 06.12.16.
  */
@@ -5,7 +7,7 @@ public class EventsData {
 
     private String username;
     private String filename;
-    private String eventTime;
+    private Date eventTime;
 
     public void setUsername(String username)  {
 
@@ -19,7 +21,7 @@ public class EventsData {
 
     }
 
-    public void setEventTime(String eventTime) {
+    public void setEventTime(Date eventTime) {
 
         this.eventTime = eventTime;
 
@@ -37,7 +39,7 @@ public class EventsData {
 
     }
 
-    public String getEventTime()    {
+    public Date getEventTime()    {
 
         return this.eventTime;
 

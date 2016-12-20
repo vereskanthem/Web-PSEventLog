@@ -325,7 +325,7 @@
 //            });
 
 
-            $("#db-out").kendoGrid({
+            $("#listView").kendoGrid({
 
                 dataSource: dataSource,
                 autoBind: false,
@@ -513,10 +513,10 @@
     <%--</div>--%>
 </div>
 
-<div id="db-out" class="k-content wide">
+<div id="db-out">
 
-    <%--<div id="listView"/>--%>
-    <div id="pager" class="k-pager-wrap"/>
+    <div id="listView" class="k-content"/>
+    <%--<div id="pager" class="k-pager-wrap"/>--%>
 
     <%--<table id="events-list">--%>
         <%--<thead>--%>

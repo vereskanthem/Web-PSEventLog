@@ -239,7 +239,7 @@
 
             if((username_textbox == "" && filename_textbox == "") || (username_textbox == 'Enter username please...' && filename_textbox == 'Enter filename please...'))    {
 
-                alert("Setting up username and filename like empty string!");
+//                alert("Setting up username and filename like empty string!");
 
                 json_buffer = {
 
@@ -297,7 +297,7 @@
 
             var dataSource = new kendo.data.DataSource({
 
-                type: "jsonp",
+                type: "odata",
 
                 transport: {
                     read: "GetFromDB"
@@ -334,7 +334,7 @@
                 selectable: true,
                 columns: [
 
-                     { field: "USERNAME", title: "USERNAME" },
+                     { field: "USERNAME", title: "USERNAME", width: "100px" },
                      { field: "FILENAME", title: "FILENAME", width: "100px" },
                      { field: "EVENT_TIME", title: "EVENT_TIME", width: "100px" }
 

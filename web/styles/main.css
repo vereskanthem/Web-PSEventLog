@@ -143,13 +143,13 @@ header    {
 
 #db-out       {
 
-    margin: 100px;
+    margin: 5px;
     position: relative;
     background-color: white;
     text-align: center;
+    min-height: 400px;
     /*float: inherit;*/
-    height: 410px;
-    /*height: ;*/
+    /*height: 500px;*/
     width: 46%;
     float: right;
     /*border: 2px solid antiquewhite;*/

@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-ear" name="Web-PSEventLog:javaEEApplication exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/Web_PSEventLog_javaEEApplication_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="Web-PSEventLog/javaeeApplication/javaEEApplication" />
+    </root>
+  </artifact>
+</component>

@@ -143,9 +143,9 @@ header    {
 
 #db-out       {
 
-    margin: 5px;
+    margin: 100px;
     position: relative;
-    background-color: navajowhite;
+    background-color: white;
     text-align: center;
     /*float: inherit;*/
     height: 410px;
@@ -242,5 +242,13 @@ header    {
 
     position: fixed;
     width: 100%;
+
+}
+
+#listView {
+
+    padding: 10px 5px;
+    margin-bottom: -1px;
+    min-height: 510px;
 
 }

@@ -155,16 +155,14 @@ public class DBConnect {
 
     }
 
-    public List<EventsData> getListFromDatabase(String _username, String _filename, String firstTime, String lastTime) throws SQLException, NullTimeStringException {
+    public List<Map<String, Object>> getListFromDatabase(String _username, String _filename, String firstTime, String lastTime) throws SQLException, NullTimeStringException {
 
         Statement st = connection.createStatement();
 
         int columnsCount;
 
-//        EventsDataCollection collection = new EventsDataCollection();
-
         EventsData eventData = new EventsData();
-        List<EventsData> eventsDataArray = new ArrayList<>();
+        List<Map<String, Object>> eventsRow = new ArrayList<>();
 
 //        DateConverter converter = new DateConverter();
 
@@ -178,10 +176,13 @@ public class DBConnect {
         String sql = "SELECT USERNAME,FILENAME,TIME_EVENT from PSEVENTLOG.EVENTSLOG";
 
         ResultSet selectResult = st.executeQuery(sql);
+        ResultSetMetaData metaData = selectResult.getMetaData();
 
-//        columnsCount = selectResult.getMetaData().getColumnCount();
+        columnsCount = metaData.getColumnCount();
 
         while (selectResult.next()) {
+
+            Map<String, Object> eventsColumns = new HashMap<>();
 
             String username = selectResult.getString("USERNAME");
             String filename = selectResult.getString("FILENAME");
@@ -191,14 +192,27 @@ public class DBConnect {
             eventData.setFilename(filename);
             eventData.setEventTime(time_event);
 
-            eventsDataArray.add(eventData);
+            for(int i = 1; i <= columnsCount; i++) {
+
+                eventsColumns.put(metaData.getColumnLabel(i), selectResult.getObject(i));
+
+            }
+
+            eventsRow.add(eventsColumns);
 
         }
+
+//        for(int i = 0; i < eventsRow.size(); i++) {
+//            for(Map.Entry entry : eventsRow.get(i).entrySet())   {
+//                System.out.println(entry.getKey() + " :: " + entry.getValue());
+//            }
+//            System.out.println("\n");
+//        }
 
         selectResult.close();
         st.close();
 
-        return eventsDataArray;
+        return eventsRow;
 
     }
 

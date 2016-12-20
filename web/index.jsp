@@ -294,31 +294,59 @@
                 };
 
             };
-//
-//            var dataSource = new kendo.data.DataSource({
-//
-//                type: "odata",
-//                serverFiltering: true,
-//                serverPaging: true,
-//                serverSorting: true,
-//                pageSize: 10,
-//                transport: {
-//                    read: {
-//                        cache: false,
-//                        url: 'GetFromDB',
-//                    }
-//                },
-//
-//
-//
-//            });
 
-            $.post('GetFromDB', function (data) {
-                $('#db-out').html(data);
+            var dataSource = new kendo.data.DataSource({
+
+                type: "jsonp",
+
+                transport: {
+                    read: "GetFromDB"
+                },
+                schema: {
+                    model:  {
+                        fields: {
+                            Username:   { type: "string" },
+                            Filename:   { type: "string" },
+                            Time_Event: { type: "date" }
+                        }
+                    }
+                },
+                pageSize: 20,
+                serverFiltering: true,
+                serverPaging: true,
+                serverSorting: true,
 
             });
+
+            dataSource.read();
+
+//            $("#pager").kendoPager({
+//                dataSource: dataSource
+//            });
+
+
+            $("#db-out").kendoGrid({
+
+                dataSource: dataSource,
+                autoBind: false,
+                pageable: true,
+                height: 300,
+                selectable: true,
+                columns: [
+
+                     { field: "USERNAME", title: "USERNAME" },
+                     { field: "FILENAME", title: "FILENAME", width: "100px" },
+                     { field: "EVENT_TIME", title: "EVENT_TIME", width: "100px" }
+
+                ]
+            });
+
+//            $.post('GetFromDB', function (data) {
+//                $('#db-out').html(data);
 //
-            $('#db-out').hide().fadeIn('fast');
+//            });
+//
+//            $('#db-out').hide().fadeIn('fast');
 
         }
 
@@ -326,8 +354,6 @@
 
     kendo.bind($('#view1'), addDataToDB);
     kendo.bind($('#view2'), getDataFromDB);
-
-
 
     <%-- --------------------- --%>
 
@@ -487,7 +513,10 @@
     <%--</div>--%>
 </div>
 
-<div id="db-out" class="k-content">
+<div id="db-out" class="k-content wide">
+
+    <%--<div id="listView"/>--%>
+    <div id="pager" class="k-pager-wrap"/>
 
     <%--<table id="events-list">--%>
         <%--<thead>--%>

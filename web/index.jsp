@@ -306,7 +306,7 @@
 //            filename_textbox = $("#get-filename-textbox").val();
             filename_textbox = this.get("filename");
 
-            if((username_textbox == "" && filename_textbox == "") || (username_textbox == 'Enter username please...' && filename_textbox == 'Enter filename please...'))    {
+            if((username_textbox == "" && filename_textbox == "") || (username_textbox == 'Enter username please...' && filename_textbox == 'Enter filename please...') || (username_textbox == 'Enter username please...' && filename_textbox == '') || (username_textbox == '' && filename_textbox == 'Enter filename please...'))    {
 
 //                alert("Setting up username and filename like empty string!");
 
@@ -319,7 +319,7 @@
 
                 };
 
-                throw new FatalError("Username OR filename filed MUST be not null!");
+//                throw new FatalError("Username OR filename filed MUST be not null!");
 
             }   else {
 

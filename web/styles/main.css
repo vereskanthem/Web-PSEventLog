@@ -40,7 +40,7 @@ header    {
     /*margin-bottom: 10px;*/
     /*position: static;*/
     /*height: 400px;*/
-    width: 48%;
+    width: 50%;
     float: right;
     background: antiquewhite;
     /*border: 3px solid #7b7b7b;*/
@@ -252,5 +252,11 @@ header    {
     padding: 10px 5px;
     /*margin-bottom: -1px;*/
     /*min-height: 510px;*/
+
+}
+
+#pager  {
+
+    max-height: 50px;
 
 }

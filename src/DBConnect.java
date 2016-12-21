@@ -173,7 +173,22 @@ public class DBConnect {
 //        sqlLastTime = converter.ConvertMillisecToSQLDateString(lastTime);
 
         // Need to add where statement
-        String sql = "SELECT USERNAME,FILENAME,TIME_EVENT from PSEVENTLOG.EVENTSLOG";
+        String sql = new String();
+
+        sql = "SELECT USERNAME,FILENAME,TIME_EVENT from PSEVENTLOG.EVENTSLOG";
+
+
+            if(_username.isEmpty() && !(_filename.isEmpty())) {
+                sql = "SELECT USERNAME,FILENAME,TIME_EVENT from PSEVENTLOG.EVENTSLOG WHERE FILENAME='" + _filename + "'";
+            }
+
+            if(_filename.isEmpty() && !(_username.isEmpty())) {
+                sql = "SELECT USERNAME,FILENAME,TIME_EVENT from PSEVENTLOG.EVENTSLOG WHERE USERNAME='" + _username + "'";
+            }
+
+            if(!(_username.isEmpty()) && !(_filename.isEmpty()))  {
+                sql = "SELECT USERNAME,FILENAME,TIME_EVENT from PSEVENTLOG.EVENTSLOG WHERE USERNAME='" + _username + "' and FILENAME='" + _filename + "'";
+            }
 
         ResultSet selectResult = st.executeQuery(sql);
         ResultSetMetaData metaData = selectResult.getMetaData();

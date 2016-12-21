@@ -41,7 +41,6 @@ public class AddToDB extends HttpServlet {
 
         try {
 
-//            dbConnection.selectFromDatabase(firstDateParam,lastDateParam);
             dbConnection.addToDatabase(usernameParam, filenameParam, firstDateParam);
 
         } catch (SQLException e) {

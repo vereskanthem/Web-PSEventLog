@@ -93,9 +93,78 @@
 <script src="kendo/js/kendo.all.min.js"></script>
 
 <%--<script> $("#datepicker").kendoDatePicker(); </script>--%>
-
     <input type="hidden" id="jsonData" name="jsonData"/>
     <input type="hidden" id="test" name="test"/>
+
+</article>
+</div>
+<div class="right-of-page">
+<div id="div-head-iscription" class="k-content"> Output of JS/JAVA+DB: </div>
+<%--<div class="k-content">--%>
+
+    <%--<div class="div-inside-right-of-page k-content"></div>--%>
+
+    <%--Same text.--%>
+    <%--..... <br>--%>
+    <%--.....--%>
+    <%--.....--%>
+    <%--.....--%>
+<div id="div-clean-output" class="k-content">
+    <font color="gray">Transactions:</font>
+</div>
+
+<div id="div-json-from-js" class="k-content">
+        <font color="#b0c4de">JSON Out !</font>
+        <%--<%--%>
+
+            <%--Random rand;--%>
+
+            <%--rand = new Random();--%>
+
+            <%--if(rand.nextDouble() > 0.5) {--%>
+                <%--out.println("OUT from java at index.jsp!");--%>
+            <%--}   else    {--%>
+                <%--out.println("OUT from java at index.jsp!!");--%>
+            <%--}--%>
+            <%----%>
+        <%--%>--%>
+</div>
+    <div id="div-jsp-out" class="k-content">
+        <%--<%--%>
+            <%--String req = request.getParameter("jsonData");--%>
+            <%--if(req != null) out.println(req);--%>
+            <%--else            out.println("<font color=\"red\">JSP Out</font>");--%>
+        <%--%>--%>
+
+        <%--<%--%>
+
+<%--//            (String)request.getAttribute("jsonData")--%>
+            <%--String testParam = request.getParameter("test");--%>
+
+            <%--if(testParam == null)   {--%>
+
+                <%--out.println("FUUUUUUU!");--%>
+
+            <%--}   else    {--%>
+
+                <%--out.println(testParam);--%>
+
+            <%--}--%>
+
+        <%--%>--%>
+        <%
+              out.println("<font color=\"red\">JSP out !</font>");
+        %>
+    </div>
+
+</div>
+
+<div id="db-out">
+
+    <div id="listView" class="k-content"/>
+    <div id="pager" class="k-pager-wrap"/>
+
+</div>
 
 <script>
 
@@ -295,14 +364,36 @@
 
             };
 
+//            $('#div-json-from-js').html(JSON.stringify(json_buffer));
+//
+//            $.post('GetFromDB', json_buffer, function (data) {
+////                $('#div-jsp-out').html(data);
+//            });
+
+            var json_input = JSON.stringify(json_buffer);
+
             var dataSource = new kendo.data.DataSource({
 
                 transport: {
                     read: {
                         url: "GetFromDB",
                         dataType: "json",
-                        contentType: 'application/json; charset=utf-8',
-                        type: "POST"
+//                        contentType: 'application/json; charset=utf-8',
+                        type: "POST",
+                        data: function() {
+
+                            var json_var = {
+
+                                username: json_buffer.username,
+                                filename: json_buffer.filename,
+                                firstDate: json_buffer.firstDate,
+                                lastDate: json_buffer.lastDate
+
+                            }
+
+                            return json_buffer;
+
+                        }
                     }
                 },
                 schema: {
@@ -310,7 +401,7 @@
                         fields: {
                             USERNAME:   { type: "string" },
                             FILENAME:   { type: "string" },
-                            EVENT_TIME: { type: "date" }
+                            TIME_EVENT: { type: "string" }
                         }
                     }
                 },
@@ -328,20 +419,24 @@
 
                 columns: [
 
-                     { field: "USERNAME", title: "USERNAME", width: "100px" },
-                     { field: "FILENAME", title: "FILENAME", width: "100px" },
-                     { field: "EVENT_TIME", title: "EVENT_TIME", width: "100px" }
+                    { field: "USERNAME", title: "USERNAME", width: "100px" },
+                    { field: "FILENAME", title: "FILENAME", width: "100px" },
+                    { field: "TIME_EVENT", title: "TIME_EVENT", width: "120px" }
 
                 ]
             });
 
-//            $("#listView").kendoListView({
-//                dataSource: dataSource,
-//                template: kendo.template($("#template").html())
-//            });
+            $('#pager').show();
+
+            $("#pager").kendoPager({
+                autoBind: false,
+                dataSource: dataSource,
+                buttonCount: 3
+            });
 
 //            $('#db-out').html(dataSource);
 //            $('#db-out').hide().fadeIn('fast');
+
 
         }
 
@@ -376,165 +471,11 @@
         }
     });
 
-//        $('#nav-button1').click(function () {
-//
-//            var JSONSrcArray;
-//            var calendar;
-//            var firstDate;
-//            var lastDate;
-//
-//            calendar = $("#calendar-to-date").data("kendoCalendar");
-//            firstDate = calendar.current();
-//
-//            calendar = $("#calendar-to-date").data("kendoCalendar");
-//            lastDate = calendar.current();
-//
-//            JSONSrcArray = {
-//
-//                username:  $("#add-data-textbox").val(),
-//                firstDate: firstDate,
-//                lastDate: lastDate
-//
-//            };
-//            JSONSrcArray = { username: data };
-//            alert(JSONSrcArray.username);
-
-//            var JSONSerial = JSONStringArray.serialize();
-
-//            $.post('AddToDB', { test: "testing!" }, function (data) {
-//                $('#div-jsp').html(data);
-//            });
-
-//            $.post('AddToDB', JSONSrcArray, function (data) {
-//                $('#div-jsp').html(data);
-//            });
-
-//            $.ajax({
-//
-//                type: "post",
-//                dataType: "json",
-//                data: JSONConverted,
-//                contentType: "application/json",
-//                url:  "/AddToDB",
-//                success: function (data) {
-//
-//                    alert("Working well! Json: " + data);
-//                    $('#div-jsp').html(data);
-//
-//                },
-//                error: function () {
-//                    alert("Error! Cannot get response.");
-//                }
-//            });
-
-//        });
+    $(document).ready(function() {
+       $('#pager').hide();
+    });
 
 </script>
-
-</article>
-</div>
-<div class="right-of-page">
-<div id="div-head-iscription" class="k-content"> Output of JS/JAVA+DB: </div>
-<%--<div class="k-content">--%>
-
-    <%--<div class="div-inside-right-of-page k-content"></div>--%>
-
-    <%--Same text.--%>
-    <%--..... <br>--%>
-    <%--.....--%>
-    <%--.....--%>
-    <%--.....--%>
-<div id="div-clean-output" class="k-content">
-    <font color="gray">Transactions:</font>
-</div>
-
-<div id="div-json-from-js" class="k-content">
-        <font color="#b0c4de">JSON Out !</font>
-        <%--<%--%>
-
-            <%--Random rand;--%>
-
-            <%--rand = new Random();--%>
-
-            <%--if(rand.nextDouble() > 0.5) {--%>
-                <%--out.println("OUT from java at index.jsp!");--%>
-            <%--}   else    {--%>
-                <%--out.println("OUT from java at index.jsp!!");--%>
-            <%--}--%>
-            <%----%>
-        <%--%>--%>
-</div>
-    <div id="div-jsp-out" class="k-content">
-        <%--<%--%>
-            <%--String req = request.getParameter("jsonData");--%>
-            <%--if(req != null) out.println(req);--%>
-            <%--else            out.println("<font color=\"red\">JSP Out</font>");--%>
-        <%--%>--%>
-
-        <%--<%--%>
-
-<%--//            (String)request.getAttribute("jsonData")--%>
-            <%--String testParam = request.getParameter("test");--%>
-
-            <%--if(testParam == null)   {--%>
-
-                <%--out.println("FUUUUUUU!");--%>
-
-            <%--}   else    {--%>
-
-                <%--out.println(testParam);--%>
-
-            <%--}--%>
-
-        <%--%>--%>
-        <%
-//            session.getAttribute("test")
-
-
-//            if(testParam == null) {
-
-              out.println("<font color=\"red\">JSP out !</font>");
-
-//            }   else    {
-
-
-
-//            }
-
-        %>
-    </div>
-    <%--<div id="div-status">STATUS</div>--%>
-
-    <%--</div>--%>
-</div>
-
-<div id="db-out">
-
-    <div id="listView" class="k-content"/>
-    <%--<div id="pager" class="k-pager-wrap"/>--%>
-
-    <%--<table id="events-list">--%>
-        <%--<thead>--%>
-            <%--<tr>--%>
-                <%--<th>ID_EVENT</th>--%>
-                <%--<th>USERNAME</th>--%>
-                <%--<th>FILENAME</th>--%>
-                <%--<th>EVENT_DATE</th>--%>
-            <%--</tr>--%>
-        <%--</thead>--%>
-
-        <%--<tbody>--%>
-            <%--<tr>--%>
-                <%--&lt;%&ndash;<td colspan="4"></td>&ndash;%&gt;--%>
-                <%--<th>ololo</th>--%>
-                <%--<th>ololo</th>--%>
-                <%--<th>ololo</th>--%>
-                <%--<th>ololo</th>--%>
-            <%--</tr>--%>
-        <%--</tbody>--%>
-    <%--</table>--%>
-
-</div>
 
 </body>
 </html>

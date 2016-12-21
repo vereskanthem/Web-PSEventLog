@@ -77,7 +77,7 @@ header    {
     text-align: center;
     /*border: 2px solid #2e3138;*/
     padding: 9px;
-    /*display: flex;*/
+    display: none;
     /*display: inline-block;*/
     overflow: auto;
 
@@ -95,6 +95,7 @@ header    {
     float: right;
     /*border: 2px solid antiquewhite;*/
     padding: 9px;
+    display: none;
     /*display: flex;*/
     /*display: inline-block;*/
     overflow: auto;
@@ -114,6 +115,7 @@ header    {
     float: right;
     /*border: 2px solid antiquewhite;*/
     padding: 9px;
+    display: none;
     /*display: flex;*/
     /*display: inline-block;*/
     overflow: auto;
@@ -134,7 +136,7 @@ header    {
     float: right;
     /*border: 2px solid antiquewhite;*/
     padding: 9px;
-    /*display: flex;*/
+    display: none;
     /*display: inline-block;*/
     overflow: auto;
     /*border-radius: 20%;*/
@@ -207,12 +209,12 @@ header    {
 
 }
 
-#jsp-send:hover  span   {
+/*#jsp-send:hover  span   {*/
 
-    opacity: 1;
-    visibility: visible;
+    /*opacity: 1;*/
+    /*visibility: visible;*/
 
-}
+/*}*/
 
 #view1   {
 

@@ -53,33 +53,14 @@ public class AddToDB extends HttpServlet {
             e.printStackTrace();
         }
 
-        listOfStrings.add(usernameParam);
-        listOfStrings.add(filenameParam);
-//        listOfStrings.add(firstDate);
-        listOfStrings.add(firstDateParam);
-        listOfStrings.add(lastDateParam);
-//        listOfStrings.add(lastDateParam);
+        listOfStrings.add("<b>UN: </b>" + usernameParam + " | ");
+        listOfStrings.add("<b>UN: </b>" + filenameParam + " | ");
 
-        if(dbConnection.getStatusConnection() == 0) {
+        listOfStrings.add("<b>FD: </b>" + firstDateParam + " (ms) | ");
+        listOfStrings.add("<b>FD: </b>" + lastDateParam + " (ms) | ");
 
-            listOfStrings.add("::connected!");
-
-        }   else {
-
-            listOfStrings.add("::NOT connected!");
-
-        }
-
-        if(dbConnection.getOracleConnectClassExist() == 0)  {
-
-            listOfStrings.add("::Class EXIST!");
-
-        }   else    {
-
-            listOfStrings.add("::Class NOT Exist!");
-
-        }
-//        listOfEvents.put(listOfEvents);
+        if(dbConnection.getOracleConnectClassExist() != 0) listOfStrings.add("::Class NOT Exist!::");
+        if(dbConnection.getStatusConnection() != 0) listOfStrings.add("::NOT connected!::");
 
         Gson gson = new Gson();
 

@@ -297,41 +297,35 @@
 
             var dataSource = new kendo.data.DataSource({
 
-                type: "odata",
-
                 transport: {
-                    read: "GetFromDB"
+                    read: {
+                        url: "GetFromDB",
+                        dataType: "json",
+                        contentType: 'application/json; charset=utf-8',
+                        type: "POST"
+                    }
                 },
                 schema: {
                     model:  {
                         fields: {
-                            Username:   { type: "string" },
-                            Filename:   { type: "string" },
-                            Time_Event: { type: "date" }
+                            USERNAME:   { type: "string" },
+                            FILENAME:   { type: "string" },
+                            EVENT_TIME: { type: "date" }
                         }
                     }
                 },
-                pageSize: 20,
-                serverFiltering: true,
-                serverPaging: true,
-                serverSorting: true,
-
+                filterable: true,
+                groupable: true,
+                sortable: true,
+                pageable: true,
+                pageSize: 10,
+                height: 200
             });
-
-            dataSource.read();
-
-//            $("#pager").kendoPager({
-//                dataSource: dataSource
-//            });
-
 
             $("#listView").kendoGrid({
 
                 dataSource: dataSource,
-                autoBind: false,
-                pageable: true,
-                height: 300,
-                selectable: true,
+
                 columns: [
 
                      { field: "USERNAME", title: "USERNAME", width: "100px" },
@@ -341,11 +335,12 @@
                 ]
             });
 
-//            $.post('GetFromDB', function (data) {
-//                $('#db-out').html(data);
-//
+//            $("#listView").kendoListView({
+//                dataSource: dataSource,
+//                template: kendo.template($("#template").html())
 //            });
-//
+
+//            $('#db-out').html(dataSource);
 //            $('#db-out').hide().fadeIn('fast');
 
         }

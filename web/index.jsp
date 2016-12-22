@@ -89,9 +89,6 @@
 
     </div>
 
-<script src="kendo/js/jquery.min.js"></script>
-<script src="kendo/js/kendo.all.min.js"></script>
-
 <%--<script> $("#datepicker").kendoDatePicker(); </script>--%>
     <input type="hidden" id="jsonData" name="jsonData"/>
     <input type="hidden" id="test" name="test"/>
@@ -165,6 +162,10 @@
     <div id="pager" class="k-pager-wrap"/>
 
 </div>
+
+<script src="kendo/js/jquery.min.js"></script>
+<script src="kendo/js/kendo.all.min.js"></script>
+<script src="kendo/js/jszip.min.js"></script>
 
 <script>
 
@@ -315,7 +316,8 @@
                     username: "",
                     filename: "",
                     firstDate: firstDate,
-                    lastDate: lastDate
+                    lastDate: lastDate,
+                    nobuffer: $.now()
 
                 };
 
@@ -328,7 +330,8 @@
                     username: username_textbox,
                     filename: filename_textbox,
                     firstDate: firstDate,
-                    lastDate: lastDate
+                    lastDate: lastDate,
+                    nobuffer: $.now()
 
                 };
 
@@ -343,7 +346,8 @@
                         username: "",
                         filename: filename_textbox,
                         firstDate: firstDate,
-                        lastDate: lastDate
+                        lastDate: lastDate,
+                        nobuffer: $.now()
 
                     };
 
@@ -356,7 +360,8 @@
                         username: username_textbox,
                         filename: "",
                         firstDate: firstDate,
-                        lastDate: lastDate
+                        lastDate: lastDate,
+                        nobuffer: $.now()
 
                     };
 
@@ -382,15 +387,6 @@
                         type: "POST",
                         data: function() {
 
-                            var json_var = {
-
-                                username: json_buffer.username,
-                                filename: json_buffer.filename,
-                                firstDate: json_buffer.firstDate,
-                                lastDate: json_buffer.lastDate
-
-                            }
-
                             return json_buffer;
 
                         }
@@ -409,14 +405,32 @@
                 groupable: true,
                 sortable: true,
                 pageable: true,
+                resizable: true,
+                selectable: true,
                 pageSize: 10,
                 height: 200
             });
 
             $("#listView").kendoGrid({
 
+                toolbar: ["excel", "pdf"],
+                excel: {
+                    fileName: "Export.xlsx",
+                    allPages: true,
+                    filterable: true
+                },
+                pdf: {
+                    filename: "Export.pdf",
+                    allPages: true,
+                    filterable: true
+                },
+                resizable: true,
+                selectable: "multiple cell",
                 dataSource: dataSource,
-
+                sortable: {
+                    mode: "multiple",
+                    allowUnsort: true
+                },
                 columns: [
 
                     { field: "USERNAME", title: "USERNAME", width: "100px" },

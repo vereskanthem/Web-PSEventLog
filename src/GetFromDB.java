@@ -46,11 +46,17 @@ public class GetFromDB extends HttpServlet {
         if(usernameParam == null)   {usernameParam = "";}
         if(filenameParam == null)   {filenameParam = "";}
 
-        if(usernameParam.contains("Enter username please..."))     {usernameParam = "";}
-        if(filenameParam.contains("Enter username please..."))     {filenameParam = "";}
+        if(usernameParam.contains("Enter username please...") || (usernameParam == null))
+        {usernameParam = "";}
+        if(filenameParam.contains("Enter username please...") || (filenameParam == null))
+        {filenameParam = "";}
+        if(firstDateParam.isEmpty())     {firstDateParam = "";}
+        if(lastDateParam.isEmpty())     {lastDateParam = "";}
 
         System.out.println("username: " + usernameParam);
         System.out.println("filename: " + filenameParam);
+        System.out.println("firstDate: " + firstDateParam);
+        System.out.println("lastDate: " + lastDateParam);
 
         DBConnect dbConnection = new DBConnect();
 

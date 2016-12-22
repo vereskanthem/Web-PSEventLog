@@ -161,33 +161,38 @@ public class DBConnect {
 
         int columnsCount;
 
+        String sqlFirstTime = new String();
+        String sqlLastTime = new String();
+
         EventsData eventData = new EventsData();
         List<Map<String, Object>> eventsRow = new ArrayList<>();
 
-//        DateConverter converter = new DateConverter();
+        DateConverter converter = new DateConverter();
 
 //        if(firstTime.equals("")) throw new NullTimeStringException("Begin of Time Interval is NULL!");
 //        if(lastTime.equals("")) throw new NullTimeStringException("End of Time Interval is NULL!");
 
-//        sqlFirstTime = converter.ConvertMillisecToSQLDateString(firstTime);
-//        sqlLastTime = converter.ConvertMillisecToSQLDateString(lastTime);
+        if(!firstTime.isEmpty())  sqlFirstTime = converter.ConvertMillisecToSQLDateString(firstTime);
+        if(!lastTime.isEmpty())  sqlLastTime = converter.ConvertMillisecToSQLDateString(lastTime);
+
+        System.out.println("FirstDate: " + sqlFirstTime);
+        System.out.println("LastDate: " + sqlLastTime);
 
         // Need to add where statement
         String sql = new String();
 
         sql = "SELECT USERNAME,FILENAME,TIME_EVENT from PSEVENTLOG.EVENTSLOG";
 
-
             if(_username.isEmpty() && !(_filename.isEmpty())) {
-                sql = "SELECT USERNAME,FILENAME,TIME_EVENT from PSEVENTLOG.EVENTSLOG WHERE FILENAME='" + _filename + "'";
+                sql = "SELECT USERNAME,FILENAME,TIME_EVENT from PSEVENTLOG.EVENTSLOG WHERE LOWER(FILENAME) LIKE TRIM(BOTH ' ' FROM LOWER('%" + _filename + "%')) and TIME_EVENT >= TO_DATE('" + sqlFirstTime + "','dd/MM/yyyy') and TIME_EVENT <= TO_DATE('" + sqlLastTime + "','dd/MM/yyyy')";
             }
 
             if(_filename.isEmpty() && !(_username.isEmpty())) {
-                sql = "SELECT USERNAME,FILENAME,TIME_EVENT from PSEVENTLOG.EVENTSLOG WHERE USERNAME='" + _username + "'";
+                sql = "SELECT USERNAME,FILENAME,TIME_EVENT from PSEVENTLOG.EVENTSLOG WHERE LOWER(USERNAME) LIKE TRIM(BOTH ' ' FROM LOWER('%" + _username + "%')) and TIME_EVENT >= TO_DATE('" + sqlFirstTime + "','dd/MM/yyyy') and TIME_EVENT <= TO_DATE('" + sqlLastTime + "','dd/MM/yyyy')";
             }
 
             if(!(_username.isEmpty()) && !(_filename.isEmpty()))  {
-                sql = "SELECT USERNAME,FILENAME,TIME_EVENT from PSEVENTLOG.EVENTSLOG WHERE USERNAME='" + _username + "' and FILENAME='" + _filename + "'";
+                sql = "SELECT USERNAME,FILENAME,TIME_EVENT from PSEVENTLOG.EVENTSLOG WHERE LOWER(USERNAME) LIKE TRIM(BOTH ' ' FROM LOWER('%" + _username + "%')) and LOWER(FILENAME) LIKE TRIM(BOTH ' ' FROM LOWER('%" + _filename + "%')) and TIME_EVENT >= TO_DATE('" + sqlFirstTime + "','dd/MM/yyyy') and TIME_EVENT <= TO_DATE('" + sqlLastTime + "','dd/MM/yyyy')";
             }
 
         ResultSet selectResult = st.executeQuery(sql);

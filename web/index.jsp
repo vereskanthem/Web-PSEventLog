@@ -51,41 +51,50 @@
         <%--<li><a href="#twopage"/></li>--%>
     <%--</ul>--%>
 <%--</nav>--%>
+<div class="date-panel k-content">
+
+<div class="calendars">
+    <div id="calendar-from-date"></div>
+    <div id="calendar-to-date"></div>
+</div>
+</div>
+<div style="clear:both"></div>
+<div class="example-inscriptions k-content">
+    <div class id="description">DESCRIPTION: </div>
+    <span color="red">INSERT into DB:</span>
+    <ul>
+        <li><b>SET DATE</b> at first calendar</li>
+        <li>Set <b>USERNAME</b> and <b>FILENAME</b> in the textboxes and <b>click ADD</b> button</li>
+    </ul>
+    <span color="red">SELECT from DB:</span>
+    <ul>
+        <li><b>Set DATES </b> in calendars</li>
+        <li>Set <b>USERNAME or FILENAME </b> in textboxes</li>
+        <li><b>Click SELECT Button</b> to GET data from table in DB</li>
+    </ul>
+</div>
+
+
+<%--<div class="example-inscriptions k-content">--%>
+
+<%--</div>--%>
 
 <div class="search-panel k-content">
 <%--<article>--%>
-    <div class="calendars">
-        <div id="calendar-from-date"></div>
-        <div id="calendar-to-date"></div>
-    </div>
-    <div class="buttons-div">
-    <div class="example-inscriptions k-content"> <span color="red">INSERT into DB:</span>
-        <ul>
-            <li><b>SET DATE</b> at first calendar</li>
-            <li>Set <b>USERNAME</b> and <b>FILENAME</b> in the textboxes and <b>click ADD</b> button</li>
-        </ul>
-    </div>
+
 
     <div id="view1">
         <input onfocus="if (this.value=='Enter username please...') this.value = ''" onblur="if (this.value=='') this.value='Enter username please...'" class="k-textbox" id="add-username-textbox" data-bind="value: username" />
         <input onfocus="if (this.value=='Enter filename please...') this.value = ''" onblur="if (this.value=='') this.value='Enter filename please...'" class="k-textbox" id="add-filename-textbox" data-bind="value: filename" />
-        <button class="k-button" id="jsp-send" data-bind="click: addData">Add Dates and name to DB through Java</button>
+        <button class="k-button" id="jsp-send" data-bind="click: addData">Add Dates and name to DB</button>
     </div>
 
     <div id="view2">
         <input onfocus="if (this.value=='Enter username please...') this.value = ''" onblur="if (this.value=='') this.value='Enter username please...'" class="k-textbox" id="get-username-textbox" data-bind="value: username" />
         <input onfocus="if (this.value=='Enter filename please...') this.value = ''" onblur="if (this.value=='') this.value='Enter filename please...'" class="k-textbox" id="get-filename-textbox" data-bind="value: filename" />
-        <button class="k-button" id="jsp-receive" data-bind="click: getData">SELECT data from DB through Java</button>
+        <button class="k-button" id="jsp-receive" onClick="javascript:location.href = '#db-out';"  data-bind="click: getData">SELECT data from DB</button>
     </div>
 
-    <div class="example-inscriptions k-content"> <span color="red">SELECT from DB:</span>
-        <ul>
-            <li><b>Set DATES </b> in calendars</li>
-            <li>Set <b>USERNAME or FILENAME </b> in textboxes</li>
-            <li><b>Click SELECT Button</b> to GET data from table in DB</li>
-        </ul>
-    </div>
-    </div>
     <%--<div id="view2" margin-bottom="20px">--%>
 
     <%--</div>--%>
@@ -96,8 +105,8 @@
 
 </article>
 </div>
-<div class="search-result">
-<div id="div-head-iscription" class="k-content"> Output of JS/JAVA+DB: </div>
+<%--<div class="search-result">--%>
+<%--<div id="div-head-iscription" class="k-content"> Output of JS/JAVA+DB: </div>--%>
 
 <%--<div id="div-clean-output" class="k-content">--%>
     <%--<font color="gray">Transactions:</font>--%>
@@ -107,13 +116,13 @@
         <%--<font color="#b0c4de">JSON Out !</font>--%>
 
 <%--</div>--%>
-    <div id="div-jsp-out" class="k-content">
-        <%
-              out.println("<font color=\"red\">JSP out !</font>");
-        %>
-    </div>
+    <%--<div id="div-jsp-out" class="k-content">--%>
+        <%--<%--%>
+              <%--out.println("<font color=\"red\">JSP out !</font>");--%>
+        <%--%>--%>
+    <%--</div>--%>
 
-</div>
+<%--</div>--%>
 
 <div id="db-out">
 
@@ -366,7 +375,7 @@
                 pageable: true,
                 resizable: true,
                 selectable: true,
-                pageSize: 10,
+                pageSize: 15,
                 height: 200
             });
 

@@ -109,7 +109,7 @@ public class DBConnect {
         try {
 
 //            connection = DriverManager.getConnection(connectionURL,connectionUsername,connectionPassword);
-            connection = DriverManager.getConnection("jdbc:oracle:thin:pseventlog/1@localhost:1521:orcl");
+            connection = DriverManager.getConnection("jdbc:oracle:thin:pseventlog/1@nlare-oracle:1521:orcl");
 
         }   catch(SQLException sqle) {
 

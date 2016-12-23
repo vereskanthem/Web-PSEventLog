@@ -1,4 +1,4 @@
-body { margin: 0px; background: #F7F7F8; }
+body { margin: 0px; background: #F7F7F8;}
 
 header    {
 
@@ -6,6 +6,7 @@ header    {
     position: fixed;
     /*height: 130px;*/
     width: 100%;
+    /*min-width: 2000px;*/
     /*background: #363940;*/
     color: #F7F7F8;
     display: block;
@@ -17,24 +18,42 @@ header    {
 
 .search-panel   {
 /**/
-    position: static;
+    position: absolute;
+    /*min-height: 600px;*/
+    display: inline;
     /*max-height: 400px;*/
-    max-width: 100%;
-    /*float: left;*/
+    /*margin-right: 20%;*/
+    min-width: 50%;
+    text-align: center;
+    float: left;
     background: whitesmoke;
+    padding-left: 10px;
+    padding-right: 10px;
 /**/
+}
+
+.date-panel   {
+
+    /*margin-left: 70%;*/
+    position: absolute;
+    /*background-color: #0a4d85;*/
+    /*max-width: 30%;*/
+    float: left;
+    margin-top: 120px;
+    padding: 25px;
+
 }
 
 .search-result   {
 
     /*margin-right: 10px;*/
     /*margin-left: 0px;*/
-    /*margin-top: -10px;*/
+    /*margin-top: 1500px;*/
     /*margin-bottom: 10px;*/
-    position: static;
-    max-height: 600px;
+    position: relative;
+    /*max-height: 600px;*/
     /*width: 50%;*/
-    float: none;
+    float: left;
     /*display: flex;*/
     background: antiquewhite;
     /*border: 3px solid #7b7b7b;*/
@@ -42,10 +61,25 @@ header    {
 }
 
 .calendars  {
-
-    max-width: 500px;
+    display: block;
+    position: relative;
     /*max-height: 300px;*/
-    display: inline-flex;
+    /*min-height: 800px;*/
+    /*display: inline-flex;*/
+
+}
+
+#calendar-from-date {
+
+    min-height: 300px;
+    min-width: 335px;
+
+}
+
+#calendar-to-date {
+
+    min-height: 300px;
+    min-width: 335px;
 
 }
 
@@ -53,66 +87,91 @@ header    {
 
     position: relative;
     /*max-width: 500px;*/
-    /*display: inline;*/
-    /*margin-left: 50%;*/
+    min-width: 100%;
+    display: inline-block;
+    /*margin-left: 30%;*/
 
 }
 
-#div-head-iscription       {
+#description    {
+
+    display: block;
+    /*margin: 10px;*/
+    position: relative;
+    /*margin-left: 78%;*/
+    text-align: center;
+    float: none;
+    /*z-index: 20;*/
+    font-family: sans-serif;
+    font-size: 20px;
+    font-style: inherit;
+    border-style: dashed;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-top: 10px;
+    margin-bottom: 40px;
+
+}
+
+.example-inscriptions   {
+
+    position: absolute;
+    display: block;
+    /*display: inline-block;*/
+    /*margin-bottom: 20px;*/
+    margin-top: 10px;
+    margin-left: 750px;
+    /*margin-right: 10px;*/
+    /*margin-left: 30%;*/
+    padding: 25px;
+    margin-right: 10px;
+    /*padding-bottom: inherit;*/
+    float: right;
+    font-family: sans-serif;
+    font-size: 14px;
+    font-style: inherit;
+    background-color: rgba(3, 11, 1, 0.36);
+    /*background-size: 100px 100px;*/
+    border-style: dashed;
+    text-align: center;
+    min-height: 470px;
+    max-width: 455px;
+    /*border-radius: 10%;*/
+    z-index: 15;
+
+}
+
+#view1   {
 
     position: relative;
-    background-color: whitesmoke;
-    /*float: inherit;*/
-    height: 50px;
-    /*width: 100%;*/
-    /*float: left;*/
     /*text-align: center;*/
-    /*border: 2px solid #2e3138;*/
-    /*padding: 9px;*/
-    display: none;
-    overflow: auto;
+    display: inline-block;
+    float: left;
+    width: 54%;
+    /*min-height: 800px;*/
+    max-width: 55%;
+    /*max-height: 10px;*/
+    /*margin: 0 auto;*/
+    margin-top: 10px;
+    padding: 3px;
+    z-index: 10;
 
 }
 
-/*#div-clean-output       {*/
+#view2   {
 
-    /*margin: 10px;*/
-    /*position: relative;*/
-    /*background-color: antiquewhite;*/
-    /*!*float: inherit;*!*/
-    /*height: 95px;*/
+    position: relative;
     /*text-align: center;*/
-    /*width: 90%;*/
-    /*float: right;*/
-    /*!*border: 2px solid antiquewhite;*!*/
-    /*padding: 9px;*/
-    /*display: none;*/
-    /*!*display: flex;*!*/
-    /*!*display: inline-block;*!*/
-    /*overflow: auto;*/
-    /*!*border-radius: 20%;*!*/
+    display: inline-block;
+    float: left;
+    width: 54%;
+    /*max-height: 10px;*/
+    /*margin: 0 auto;*/
+    margin-top: 20px;
+    padding: 3px;
+    z-index: 10;
 
-/*}*/
-
-/*#div-json-from-js       {*/
-
-    /*margin: 10px;*/
-    /*position: relative;*/
-    /*background-color: antiquewhite;*/
-    /*text-align: center;*/
-    /*!*float: inherit;*!*/
-    /*!*height: 50px;*!*/
-    /*width: 90%;*/
-    /*float: right;*/
-    /*!*border: 2px solid antiquewhite;*!*/
-    /*padding: 9px;*/
-    /*display: none;*/
-    /*!*display: flex;*!*/
-    /*!*display: inline-block;*!*/
-    /*overflow: auto;*/
-    /*!*border-radius: 20%;*!*/
-
-/*}*/
+}
 
 #div-jsp-out       {
 
@@ -137,16 +196,20 @@ header    {
 #db-out       {
 
     /*margin: 5px;*/
-    position: relative;
+    position: absolute;
     background-color: white;
-    text-align: center;
+    /*text-align: center;*/
     /*min-height: 400px;*/
     /*float: inherit;*/
-    height: 500px;
-    width: 100%;
-    float: right;
+    /*height: 500px;*/
+    width: 98%;
+    float: left;
     /*border: 2px solid antiquewhite;*/
-    padding: 9px;
+    /*padding: 10px;*/
+    margin-top: 570px;
+    /*margin-right: 10px;*/
+    margin-left: 20px;
+    /*margin-bottom: 10px;*/
     /*display: flex;*/
     /*display: list-item;*/
     /*overflow: auto;*/
@@ -154,118 +217,17 @@ header    {
 
 }
 
-/*#div-status       {*/
-
-    /*margin: 10px;*/
-    /*position: relative;*/
-    /*background-color: antiquewhite;*/
-    /*!*float: inherit;*!*/
-    /*!*height: 40%;*!*/
-    /*width: 40%;*/
-    /*float: right;*/
-    /*border: 2px solid antiquewhite;*/
-    /*padding: 9px;*/
-    /*!*margin: 2px;*!*/
-    /*!*display: flex;*!*/
-    /*display: inline-block;*/
-    /*overflow: auto;*/
-
-/*}*/
-
-/*.mini-container    {*/
-
-    /*margin-top: 0px;*/
-    /*!*height: 150px;*!*/
-    /*background: #050405;*/
-
-/*}*/
-
 .header-container   {
 
-    margin-top: 160px
+    margin-top: 160px;
 
 }
-
-/*.head-button    {*/
-
-    /*width: 410px;*/
-
-/*}*/
-
-/*#jsp-send span {*/
-
-    /*padding: 10px 10px 10px 40px;*/
-    /*position: absolute;*/
-    /*text-decoration: none;*/
-
-/*}*/
-
-/*#jsp-send:hover  span   {*/
-
-    /*opacity: 1;*/
-    /*visibility: visible;*/
-
-/*}*/
-
-.example-inscriptions   {
-
-    position: relative;
-    /*margin-bottom: 20px;*/
-    /*margin-top: 10px;*/
-    /*margin-right: 10px;*/
-    margin-left: 40%;
-    /*padding: 5px;*/
-    font-family: sans-serif;
-    font-size: 14px;
-    font-style: inherit;
-    background-color: rgba(3, 11, 1, 0.36);
-    /*background-size: 100px 100px;*/
-    text-align: center;
-    /*width: 95%;*/
-    /*border-radius: 10%;*/
-
-}
-
-#view1   {
-
-    position: relative;
-    text-align: center;
-    display: inherit;
-    /*width: 100%;*/
-    /*margin: 0 auto;*/
-    margin-left: 60%;
-
-}
-
-#view2   {
-
-    position: relative;
-    text-align: center;
-    display: inherit;
-    /*width: 100%;*/
-    /*margin: 5px auto 0;*/
-
-}
-
-#add-username-textbox   {
-
-    position: relative;
-
-}
-
 
 #commands   {
 
     color: slategray;
 
 }
-
-/*.test   {*/
-
-    /*position: fixed;*/
-    /*width: 100%;*/
-
-/*}*/
 
 #listView {
 
@@ -283,6 +245,6 @@ header    {
 
 .k-button   {
 
-    /*min-width: 65%;*/
+    min-width: 38%;
 
 }

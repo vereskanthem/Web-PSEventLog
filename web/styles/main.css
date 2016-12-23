@@ -15,54 +15,46 @@ header    {
 
 }
 
-.left-of-page   {
-
-    margin: 0px;
+.search-panel   {
+/**/
     position: static;
-    height: 50%;
-    width: 50%;
-    float: left;
+    /*max-height: 400px;*/
+    max-width: 100%;
+    /*float: left;*/
     background: whitesmoke;
-
+/**/
 }
 
-.k-button   {
-
-    min-width: 65%;
-
-}
-
-.right-of-page   {
+.search-result   {
 
     /*margin-right: 10px;*/
     /*margin-left: 0px;*/
     /*margin-top: -10px;*/
     /*margin-bottom: 10px;*/
-    /*position: static;*/
-    /*height: 400px;*/
-    width: 50%;
-    float: right;
+    position: static;
+    max-height: 600px;
+    /*width: 50%;*/
+    float: none;
+    /*display: flex;*/
     background: antiquewhite;
     /*border: 3px solid #7b7b7b;*/
 
 }
 
-.example-inscriptions   {
+.calendars  {
 
-    /*position: relative;*/
-    margin-bottom: 20px;
-    margin-top: 10px;
-    margin-right: 10px;
-    margin-left: 30px;
-    padding: 5px;
-    font-family: sans-serif;
-    font-size: 14px;
-    font-style: inherit;
-    background-color: rgba(3, 11, 1, 0.36);
-    /*background-size: 100px 100px;*/
-    text-align: center;
-    width: 95%;
-    /*border-radius: 10%;*/
+    max-width: 500px;
+    /*max-height: 300px;*/
+    display: inline-flex;
+
+}
+
+.buttons-div    {
+
+    position: relative;
+    /*max-width: 500px;*/
+    /*display: inline;*/
+    /*margin-left: 50%;*/
 
 }
 
@@ -71,57 +63,56 @@ header    {
     position: relative;
     background-color: whitesmoke;
     /*float: inherit;*/
-    /*height: 50px;*/
-    width: 100%;
-    float: right;
-    text-align: center;
+    height: 50px;
+    /*width: 100%;*/
+    /*float: left;*/
+    /*text-align: center;*/
     /*border: 2px solid #2e3138;*/
-    padding: 9px;
+    /*padding: 9px;*/
     display: none;
-    /*display: inline-block;*/
     overflow: auto;
 
 }
 
-#div-clean-output       {
+/*#div-clean-output       {*/
 
-    margin: 10px;
-    position: relative;
-    background-color: antiquewhite;
-    /*float: inherit;*/
-    height: 95px;
-    text-align: center;
-    width: 90%;
-    float: right;
-    /*border: 2px solid antiquewhite;*/
-    padding: 9px;
-    display: none;
-    /*display: flex;*/
-    /*display: inline-block;*/
-    overflow: auto;
-    /*border-radius: 20%;*/
+    /*margin: 10px;*/
+    /*position: relative;*/
+    /*background-color: antiquewhite;*/
+    /*!*float: inherit;*!*/
+    /*height: 95px;*/
+    /*text-align: center;*/
+    /*width: 90%;*/
+    /*float: right;*/
+    /*!*border: 2px solid antiquewhite;*!*/
+    /*padding: 9px;*/
+    /*display: none;*/
+    /*!*display: flex;*!*/
+    /*!*display: inline-block;*!*/
+    /*overflow: auto;*/
+    /*!*border-radius: 20%;*!*/
 
-}
+/*}*/
 
-#div-json-from-js       {
+/*#div-json-from-js       {*/
 
-    margin: 10px;
-    position: relative;
-    background-color: antiquewhite;
-    text-align: center;
-    /*float: inherit;*/
-    /*height: 50px;*/
-    width: 90%;
-    float: right;
-    /*border: 2px solid antiquewhite;*/
-    padding: 9px;
-    display: none;
-    /*display: flex;*/
-    /*display: inline-block;*/
-    overflow: auto;
-    /*border-radius: 20%;*/
+    /*margin: 10px;*/
+    /*position: relative;*/
+    /*background-color: antiquewhite;*/
+    /*text-align: center;*/
+    /*!*float: inherit;*!*/
+    /*!*height: 50px;*!*/
+    /*width: 90%;*/
+    /*float: right;*/
+    /*!*border: 2px solid antiquewhite;*!*/
+    /*padding: 9px;*/
+    /*display: none;*/
+    /*!*display: flex;*!*/
+    /*!*display: inline-block;*!*/
+    /*overflow: auto;*/
+    /*!*border-radius: 20%;*!*/
 
-}
+/*}*/
 
 #div-jsp-out       {
 
@@ -132,7 +123,7 @@ header    {
     /*float: inherit;*/
     /*height: 40%;*/
     /*height: ;*/
-    width: 90%;
+    /*width: 90%;*/
     float: right;
     /*border: 2px solid antiquewhite;*/
     padding: 9px;
@@ -152,7 +143,7 @@ header    {
     /*min-height: 400px;*/
     /*float: inherit;*/
     height: 500px;
-    width: 46%;
+    width: 100%;
     float: right;
     /*border: 2px solid antiquewhite;*/
     padding: 9px;
@@ -181,13 +172,13 @@ header    {
 
 /*}*/
 
-.mini-container    {
+/*.mini-container    {*/
 
-    margin-top: 0px;
-    height: 150px;
-    background: #050405;
+    /*margin-top: 0px;*/
+    /*!*height: 150px;*!*/
+    /*background: #050405;*/
 
-}
+/*}*/
 
 .header-container   {
 
@@ -195,19 +186,19 @@ header    {
 
 }
 
-.head-button    {
+/*.head-button    {*/
 
-    width: 410px;
+    /*width: 410px;*/
 
-}
+/*}*/
 
-#jsp-send span {
+/*#jsp-send span {*/
 
-    padding: 10px 10px 10px 40px;
-    position: absolute;
-    text-decoration: none;
+    /*padding: 10px 10px 10px 40px;*/
+    /*position: absolute;*/
+    /*text-decoration: none;*/
 
-}
+/*}*/
 
 /*#jsp-send:hover  span   {*/
 
@@ -216,23 +207,52 @@ header    {
 
 /*}*/
 
+.example-inscriptions   {
+
+    position: relative;
+    /*margin-bottom: 20px;*/
+    /*margin-top: 10px;*/
+    /*margin-right: 10px;*/
+    margin-left: 40%;
+    /*padding: 5px;*/
+    font-family: sans-serif;
+    font-size: 14px;
+    font-style: inherit;
+    background-color: rgba(3, 11, 1, 0.36);
+    /*background-size: 100px 100px;*/
+    text-align: center;
+    /*width: 95%;*/
+    /*border-radius: 10%;*/
+
+}
+
 #view1   {
 
-    /*position: fixed;*/
+    position: relative;
     text-align: center;
-    width: 100%;
-    margin: 0 auto;
+    display: inherit;
+    /*width: 100%;*/
+    /*margin: 0 auto;*/
+    margin-left: 60%;
 
 }
 
 #view2   {
 
-    /*position: fixed;*/
+    position: relative;
     text-align: center;
-    width: 100%;
-    margin: 5px auto 0;
+    display: inherit;
+    /*width: 100%;*/
+    /*margin: 5px auto 0;*/
 
 }
+
+#add-username-textbox   {
+
+    position: relative;
+
+}
+
 
 #commands   {
 
@@ -240,12 +260,12 @@ header    {
 
 }
 
-.test   {
+/*.test   {*/
 
-    position: fixed;
-    width: 100%;
+    /*position: fixed;*/
+    /*width: 100%;*/
 
-}
+/*}*/
 
 #listView {
 
@@ -258,5 +278,11 @@ header    {
 #pager  {
 
     max-height: 50px;
+
+}
+
+.k-button   {
+
+    /*min-width: 65%;*/
 
 }

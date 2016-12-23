@@ -52,12 +52,13 @@
     <%--</ul>--%>
 <%--</nav>--%>
 
-<div class="left-of-page k-content">
+<div class="search-panel k-content">
 <%--<article>--%>
-
-    <div id="calendar-from-date"></div>
-    <div id="calendar-to-date"></div>
-
+    <div class="calendars">
+        <div id="calendar-from-date"></div>
+        <div id="calendar-to-date"></div>
+    </div>
+    <div class="buttons-div">
     <div class="example-inscriptions k-content"> <span color="red">INSERT into DB:</span>
         <ul>
             <li><b>SET DATE</b> at first calendar</li>
@@ -68,7 +69,7 @@
     <div id="view1">
         <input onfocus="if (this.value=='Enter username please...') this.value = ''" onblur="if (this.value=='') this.value='Enter username please...'" class="k-textbox" id="add-username-textbox" data-bind="value: username" />
         <input onfocus="if (this.value=='Enter filename please...') this.value = ''" onblur="if (this.value=='') this.value='Enter filename please...'" class="k-textbox" id="add-filename-textbox" data-bind="value: filename" />
-        <button class="k-button" id="jsp-send" data-bind="click: addData">Add Dates and name to DB through Java<span>SPANB!</span></button>
+        <button class="k-button" id="jsp-send" data-bind="click: addData">Add Dates and name to DB through Java</button>
     </div>
 
     <div id="view2">
@@ -84,10 +85,10 @@
             <li><b>Click SELECT Button</b> to GET data from table in DB</li>
         </ul>
     </div>
-
-    <div id="view2" margin-bottom="20px">
-
     </div>
+    <%--<div id="view2" margin-bottom="20px">--%>
+
+    <%--</div>--%>
 
 <%--<script> $("#datepicker").kendoDatePicker(); </script>--%>
     <input type="hidden" id="jsonData" name="jsonData"/>
@@ -95,60 +96,18 @@
 
 </article>
 </div>
-<div class="right-of-page">
+<div class="search-result">
 <div id="div-head-iscription" class="k-content"> Output of JS/JAVA+DB: </div>
-<%--<div class="k-content">--%>
 
-    <%--<div class="div-inside-right-of-page k-content"></div>--%>
+<%--<div id="div-clean-output" class="k-content">--%>
+    <%--<font color="gray">Transactions:</font>--%>
+<%--</div>--%>
 
-    <%--Same text.--%>
-    <%--..... <br>--%>
-    <%--.....--%>
-    <%--.....--%>
-    <%--.....--%>
-<div id="div-clean-output" class="k-content">
-    <font color="gray">Transactions:</font>
-</div>
+<%--<div id="div-json-from-js" class="k-content">--%>
+        <%--<font color="#b0c4de">JSON Out !</font>--%>
 
-<div id="div-json-from-js" class="k-content">
-        <font color="#b0c4de">JSON Out !</font>
-        <%--<%--%>
-
-            <%--Random rand;--%>
-
-            <%--rand = new Random();--%>
-
-            <%--if(rand.nextDouble() > 0.5) {--%>
-                <%--out.println("OUT from java at index.jsp!");--%>
-            <%--}   else    {--%>
-                <%--out.println("OUT from java at index.jsp!!");--%>
-            <%--}--%>
-            <%----%>
-        <%--%>--%>
-</div>
+<%--</div>--%>
     <div id="div-jsp-out" class="k-content">
-        <%--<%--%>
-            <%--String req = request.getParameter("jsonData");--%>
-            <%--if(req != null) out.println(req);--%>
-            <%--else            out.println("<font color=\"red\">JSP Out</font>");--%>
-        <%--%>--%>
-
-        <%--<%--%>
-
-<%--//            (String)request.getAttribute("jsonData")--%>
-            <%--String testParam = request.getParameter("test");--%>
-
-            <%--if(testParam == null)   {--%>
-
-                <%--out.println("FUUUUUUU!");--%>
-
-            <%--}   else    {--%>
-
-                <%--out.println(testParam);--%>
-
-            <%--}--%>
-
-        <%--%>--%>
         <%
               out.println("<font color=\"red\">JSP out !</font>");
         %>
@@ -264,7 +223,7 @@
             $('#div-clean-output').append("<br/>");
             $('#div-clean-output').append("--------------------------");
 
-            $('#div-json-from-js').html(JSON.stringify(json_buffer));
+//            $('#div-json-from-js').html(JSON.stringify(json_buffer));
 
             $.post('AddToDB', json_buffer, function (data) {
                 $('#div-jsp-out').html(data);

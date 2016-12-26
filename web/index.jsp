@@ -92,7 +92,8 @@
     <div id="view2">
         <input onfocus="if (this.value=='Enter username please...') this.value = ''" onblur="if (this.value=='') this.value='Enter username please...'" class="k-textbox" id="get-username-textbox" data-bind="value: username" />
         <input onfocus="if (this.value=='Enter filename please...') this.value = ''" onblur="if (this.value=='') this.value='Enter filename please...'" class="k-textbox" id="get-filename-textbox" data-bind="value: filename" />
-        <button class="k-button" id="jsp-receive" onClick="javascript:location.href = '#db-out';"  data-bind="click: getData">SELECT data from DB</button>
+        <button class="k-button" id="jsp-receive" data-bind="click: getData">SELECT data from DB</button>
+        <%--onClick="javascript:location.href = '#db-out';"--%>
     </div>
 
     <%--<div id="view2" margin-bottom="20px">--%>
@@ -285,7 +286,7 @@
                     filename: "",
                     firstDate: firstDate,
                     lastDate: lastDate,
-                    nobuffer: $.now()
+                    nocache: $.now()
 
                 };
 
@@ -299,7 +300,7 @@
                     filename: filename_textbox,
                     firstDate: firstDate,
                     lastDate: lastDate,
-                    nobuffer: $.now()
+                    nocache: $.now()
 
                 };
 
@@ -315,7 +316,7 @@
                         filename: filename_textbox,
                         firstDate: firstDate,
                         lastDate: lastDate,
-                        nobuffer: $.now()
+                        nocache: $.now()
 
                     };
 
@@ -329,7 +330,7 @@
                         filename: "",
                         firstDate: firstDate,
                         lastDate: lastDate,
-                        nobuffer: $.now()
+                        nocache: $.now()
 
                     };
 
@@ -343,7 +344,7 @@
 ////                $('#div-jsp-out').html(data);
 //            });
 
-            var json_input = JSON.stringify(json_buffer);
+//            var json_input = JSON.stringify(json_buffer);
 
             var dataSource = new kendo.data.DataSource({
 
@@ -355,7 +356,7 @@
                         type: "POST",
                         data: function() {
 
-                            return json_buffer;
+                            return json_buffer
 
                         }
                     }
@@ -373,10 +374,10 @@
                 groupable: true,
                 sortable: true,
                 pageable: true,
-                resizable: true,
+//                resizable: true,
                 selectable: true,
-                pageSize: 15,
-                height: 200
+                pageSize: 50
+//                height: 200
             });
 
             $("#listView").kendoGrid({
@@ -392,7 +393,9 @@
                     allPages: true,
                     filterable: true
                 },
+                allowCopy: true,
                 resizable: true,
+                navigatable: true,
                 selectable: "multiple cell",
                 dataSource: dataSource,
                 sortable: {
@@ -403,7 +406,13 @@
 
                     { field: "USERNAME", title: "USERNAME", width: "100px" },
                     { field: "FILENAME", title: "FILENAME", width: "100px" },
-                    { field: "TIME_EVENT", title: "TIME_EVENT", width: "120px" }
+                    {
+                        field: "TIME_EVENT",
+                        title: "TIME_EVENT",
+                        width: "120px",
+                        format: "{0: dd.MM.yyyy HH:mm}",
+                        template: "#= kendo.toString(kendo.parseDate(TIME_EVENT, 'dd.MM.yyyy HH:mm'), 'dd.MM.yyyy HH:mm') #"
+                    }
 
                 ]
             });
@@ -413,7 +422,8 @@
             $("#pager").kendoPager({
                 autoBind: false,
                 dataSource: dataSource,
-                buttonCount: 3
+                buttonCount: 10,
+                async: false
             });
 
 //            $('#db-out').html(dataSource);

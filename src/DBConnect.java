@@ -109,7 +109,7 @@ public class DBConnect {
         try {
 
 //            connection = DriverManager.getConnection(connectionURL,connectionUsername,connectionPassword);
-            connection = DriverManager.getConnection("jdbc:oracle:thin:pseventlog/1@nlare-oracle:1521:orcl");
+            connection = DriverManager.getConnection("jdbc:oracle:thin:pseventlog/1@localhost:1521:orcl");
 
         }   catch(SQLException sqle) {
 
@@ -164,6 +164,8 @@ public class DBConnect {
         String sqlFirstTime = new String();
         String sqlLastTime = new String();
 
+        String sqlDateFormat = "dd.MM.yyyy HH24:MI";
+
         EventsData eventData = new EventsData();
         List<Map<String, Object>> eventsRow = new ArrayList<>();
 
@@ -184,15 +186,15 @@ public class DBConnect {
         sql = "SELECT USERNAME,FILENAME,TIME_EVENT from PSEVENTLOG.EVENTSLOG";
 
             if(_username.isEmpty() && !(_filename.isEmpty())) {
-                sql = "SELECT USERNAME,FILENAME,TIME_EVENT from PSEVENTLOG.EVENTSLOG WHERE LOWER(FILENAME) LIKE TRIM(BOTH ' ' FROM LOWER('%" + _filename + "%')) and TIME_EVENT >= TO_DATE('" + sqlFirstTime + "','dd/MM/yyyy') and TIME_EVENT <= TO_DATE('" + sqlLastTime + "','dd/MM/yyyy')";
+                sql = "SELECT USERNAME,FILENAME,TIME_EVENT from PSEVENTLOG.EVENTSLOG WHERE LOWER(FILENAME) LIKE TRIM(BOTH ' ' FROM LOWER('%" + _filename + "%')) and TIME_EVENT >= TO_DATE('" + sqlFirstTime + "','" + sqlDateFormat + "') and TIME_EVENT <= TO_DATE('" + sqlLastTime + "','" + sqlDateFormat + "')";
             }
 
             if(_filename.isEmpty() && !(_username.isEmpty())) {
-                sql = "SELECT USERNAME,FILENAME,TIME_EVENT from PSEVENTLOG.EVENTSLOG WHERE LOWER(USERNAME) LIKE TRIM(BOTH ' ' FROM LOWER('%" + _username + "%')) and TIME_EVENT >= TO_DATE('" + sqlFirstTime + "','dd/MM/yyyy') and TIME_EVENT <= TO_DATE('" + sqlLastTime + "','dd/MM/yyyy')";
+                sql = "SELECT USERNAME,FILENAME,TIME_EVENT from PSEVENTLOG.EVENTSLOG WHERE LOWER(USERNAME) LIKE TRIM(BOTH ' ' FROM LOWER('%" + _username + "%')) and TIME_EVENT >= TO_DATE('" + sqlFirstTime + "','" + sqlDateFormat + "') and TIME_EVENT <= TO_DATE('" + sqlLastTime + "','" + sqlDateFormat + "')";
             }
 
             if(!(_username.isEmpty()) && !(_filename.isEmpty()))  {
-                sql = "SELECT USERNAME,FILENAME,TIME_EVENT from PSEVENTLOG.EVENTSLOG WHERE LOWER(USERNAME) LIKE TRIM(BOTH ' ' FROM LOWER('%" + _username + "%')) and LOWER(FILENAME) LIKE TRIM(BOTH ' ' FROM LOWER('%" + _filename + "%')) and TIME_EVENT >= TO_DATE('" + sqlFirstTime + "','dd/MM/yyyy') and TIME_EVENT <= TO_DATE('" + sqlLastTime + "','dd/MM/yyyy')";
+                sql = "SELECT USERNAME,FILENAME,TIME_EVENT from PSEVENTLOG.EVENTSLOG WHERE LOWER(USERNAME) LIKE TRIM(BOTH ' ' FROM LOWER('%" + _username + "%')) and LOWER(FILENAME) LIKE TRIM(BOTH ' ' FROM LOWER('%" + _filename + "%')) and TIME_EVENT >= TO_DATE('" + sqlFirstTime + ",'" + sqlDateFormat + "') and TIME_EVENT <= TO_DATE('" + sqlLastTime + ",'" + sqlDateFormat + "')";
             }
 
         ResultSet selectResult = st.executeQuery(sql);

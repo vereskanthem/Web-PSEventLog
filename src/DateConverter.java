@@ -11,7 +11,7 @@ public class DateConverter {
     public String ConvertMillisecToSQLDateString(String sourceDateInMillisec)   {
 
         Long sourceDateLong = Long.parseLong(sourceDateInMillisec);
-        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        DateFormat formatter = new SimpleDateFormat("dd.MM.yyyy HH:mm");
 
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(sourceDateLong);

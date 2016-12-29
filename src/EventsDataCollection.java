@@ -20,7 +20,7 @@ public class EventsDataCollection {
     }
 
     // Using for READ data FROM DataBase and out into JSP
-    public void addToCollection(String username, String filename, Date event_time)   {
+    public void addToCollection(String username, String filename, String event_time)   {
 
 //        if((username.equals("")))  {
 //
@@ -43,7 +43,7 @@ public class EventsDataCollection {
 //        }
 //
 //        EventData.setEventTime(event_time);
-
+//
         EventData.setUsername(username);
         EventData.setFilename(filename);
         EventData.setEventTime(event_time);

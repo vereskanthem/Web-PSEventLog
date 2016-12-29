@@ -1,6 +1,5 @@
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.LocalTime;
 import java.util.Calendar;
 
 /**
@@ -8,10 +7,11 @@ import java.util.Calendar;
  */
 public class DateConverter {
 
-    public String ConvertMillisecToSQLDateString(String sourceDateInMillisec)   {
+    public String ConvertMillisecToSQLDateString(String sourceDateInMillisec, String dateFormat)   {
 
         Long sourceDateLong = Long.parseLong(sourceDateInMillisec);
-        DateFormat formatter = new SimpleDateFormat("dd.MM.yyyy HH:mm");
+        DateFormat formatter = new SimpleDateFormat(dateFormat);
+//        DateFormat formatter = new SimpleDateFormat("dd.MM.yyyy HH:mm");
 
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(sourceDateLong);

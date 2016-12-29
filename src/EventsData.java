@@ -7,7 +7,7 @@ public class EventsData {
 
     private String username;
     private String filename;
-    private Date eventTime;
+    private String eventTime;
 
     public void setUsername(String username)  {
 
@@ -21,7 +21,7 @@ public class EventsData {
 
     }
 
-    public void setEventTime(Date eventTime) {
+    public void setEventTime(String eventTime) {
 
         this.eventTime = eventTime;
 
@@ -39,7 +39,7 @@ public class EventsData {
 
     }
 
-    public Date getEventTime()    {
+    public String getEventTime()    {
 
         return this.eventTime;
 

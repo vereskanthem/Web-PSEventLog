@@ -5,6 +5,7 @@
 import java.sql.*;
 import java.sql.Date;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 //import java.sql.*;
@@ -17,9 +18,19 @@ public class DBConnect {
 
     private int statusConnection;
     private int oracleConnectClassExist;
-    private Connection connection = null;
+    private Connection connection;
+
+    String sqlDateFormat;
 
     EventsData data = new EventsData();
+
+    public DBConnect() {
+
+        sqlDateFormat = "yyyy.MM.dd";
+//        sqlDateFormat = "yyyy-MM-dd'T'HH:mm:ssz";
+        connection = null;
+
+    }
 
 //    List<EventsData> dataList = new List<EventsData>();
 
@@ -141,11 +152,15 @@ public class DBConnect {
 
         DateConverter converter = new DateConverter();
 
-        String sqlDate = converter.ConvertMillisecToSQLDateString(eventdate);
+        String sqlDate = converter.ConvertMillisecToSQLDateString(eventdate,sqlDateFormat);
 
-        // Need correction of datatype!
+        // Need correction of date type!
 
-        st.executeUpdate("INSERT into PSEVENTLOG.EventsLog (USERNAME,FILENAME,TIME_EVENT)" + " VALUES ('" + username + "','" + filename + "', to_date('" + sqlDate + "', 'dd/MM/yyyy'))");
+        String sql = new String();
+
+        sql = "INSERT into PSEVENTLOG.EventsLog (USERNAME,FILENAME,TIME_EVENT) VALUES ('" + username + "','" + filename + "', to_date('" + sqlDate + "','" + sqlDateFormat + "'))";
+
+        st.executeUpdate(sql);
 //        st.executeUpdate("INSERT into PSEVENTLOG.EventsLog (USERNAME,FILENAME,TIME_STRING)" + " VALUES ('" + username + "','" + filename + "','" + dateString + "')");
 //        st.executeUpdate("INSERT into PSEVENTLOG.EventsLog (USERNAME,FILENAME,TIME_EVENT) VALUES ('testuser2','testfile2',null)");
 
@@ -164,8 +179,6 @@ public class DBConnect {
         String sqlFirstTime = new String();
         String sqlLastTime = new String();
 
-        String sqlDateFormat = "dd.MM.yyyy HH24:MI";
-
         EventsData eventData = new EventsData();
         List<Map<String, Object>> eventsRow = new ArrayList<>();
 
@@ -174,8 +187,8 @@ public class DBConnect {
 //        if(firstTime.equals("")) throw new NullTimeStringException("Begin of Time Interval is NULL!");
 //        if(lastTime.equals("")) throw new NullTimeStringException("End of Time Interval is NULL!");
 
-        if(!firstTime.isEmpty())  sqlFirstTime = converter.ConvertMillisecToSQLDateString(firstTime);
-        if(!lastTime.isEmpty())  sqlLastTime = converter.ConvertMillisecToSQLDateString(lastTime);
+        if(!firstTime.isEmpty())  sqlFirstTime = converter.ConvertMillisecToSQLDateString(firstTime, sqlDateFormat);
+        if(!lastTime.isEmpty())  sqlLastTime = converter.ConvertMillisecToSQLDateString(lastTime, sqlDateFormat);
 
         System.out.println("FirstDate: " + sqlFirstTime);
         System.out.println("LastDate: " + sqlLastTime);
@@ -210,13 +223,35 @@ public class DBConnect {
             String filename = selectResult.getString("FILENAME");
             Date time_event = selectResult.getDate("TIME_EVENT");
 
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssz");
+            String converted_time = formatter.format(time_event);
+
+            System.out.println("time_event = " + converted_time);
+
             eventData.setUsername(username);
             eventData.setFilename(filename);
-            eventData.setEventTime(time_event);
+            eventData.setEventTime(converted_time);
 
             for(int i = 1; i <= columnsCount; i++) {
 
-                eventsColumns.put(metaData.getColumnLabel(i), selectResult.getObject(i));
+//                eventsColumns.put(metaData.getColumnLabel(i), selectResult.getObject(i));
+                if (metaData.getColumnLabel(i).equals("USERNAME")) {
+
+                    eventsColumns.put(metaData.getColumnLabel(i), eventData.getUsername());
+
+                }
+
+                if (metaData.getColumnLabel(i).equals("FILENAME")) {
+
+                    eventsColumns.put(metaData.getColumnLabel(i), eventData.getFilename());
+
+                }
+
+                if (metaData.getColumnLabel(i).equals("TIME_EVENT")) {
+
+                    eventsColumns.put(metaData.getColumnLabel(i), eventData.getEventTime());
+
+                }
 
             }
 

@@ -366,18 +366,11 @@
                         fields: {
                             USERNAME:   { type: "string" },
                             FILENAME:   { type: "string" },
-                            TIME_EVENT: { type: "string" }
+                            TIME_EVENT: { type: "date" }
                         }
                     }
                 },
-                filterable: true,
-                groupable: true,
-                sortable: true,
-                pageable: true,
-//                resizable: true,
-                selectable: true,
-                pageSize: 50
-//                height: 200
+                pageSize: 15
             });
 
             $("#listView").kendoGrid({
@@ -396,8 +389,12 @@
                 allowCopy: true,
                 resizable: true,
                 navigatable: true,
-                selectable: "multiple cell",
+//                selectable: "multiple cell",
+                selectable: true,
                 dataSource: dataSource,
+                pageable: true,
+                filterable: true,
+                groupable: true,
                 sortable: {
                     mode: "multiple",
                     allowUnsort: true
@@ -410,21 +407,21 @@
                         field: "TIME_EVENT",
                         title: "TIME_EVENT",
                         width: "120px",
-                        format: "{0: dd.MM.yyyy HH:mm}",
-                        template: "#= kendo.toString(kendo.parseDate(TIME_EVENT, 'dd.MM.yyyy HH:mm'), 'dd.MM.yyyy HH:mm') #"
+                        format: "{0:dd.MM.yyyy HH:mm}"
+//                        template: "#= kendo.toString(kendo.parseDate(TIME_EVENT, 'yyyy-MM-dd'T'HH:mm:ssz'), 'dd.MM.yyyy hh:mm') #"
                     }
 
                 ]
             });
 
-            $('#pager').show();
+//            $('#pager').show();
 
-            $("#pager").kendoPager({
-                autoBind: false,
-                dataSource: dataSource,
-                buttonCount: 10,
-                async: false
-            });
+//            $("#pager").kendoPager({
+//                autoBind: false,
+//                dataSource: dataSource,
+//                buttonCount: 10,
+//                async: false
+//            });
 
 //            $('#db-out').html(dataSource);
 //            $('#db-out').hide().fadeIn('fast');
@@ -436,8 +433,6 @@
 
     kendo.bind($('#view1'), addDataToDB);
     kendo.bind($('#view2'), getDataFromDB);
-
-    <%-- --------------------- --%>
 
     $("#calendar-from-date").kendoCalendar({
         min: new Date(2016,7,1),

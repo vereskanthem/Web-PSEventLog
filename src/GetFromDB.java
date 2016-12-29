@@ -48,7 +48,7 @@ public class GetFromDB extends HttpServlet {
 
         if(usernameParam.contains("Enter username please...") || (usernameParam == null))
         {usernameParam = "";}
-        if(filenameParam.contains("Enter username please...") || (filenameParam == null))
+        if(filenameParam.contains("Enter filename please...") || (filenameParam == null))
         {filenameParam = "";}
         if(firstDateParam.isEmpty())     {firstDateParam = "";}
         if(lastDateParam.isEmpty())     {lastDateParam = "";}

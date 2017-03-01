@@ -18,14 +18,15 @@ header    {
 
 .search-panel   {
 /**/
-    position: absolute;
+    position: relative;
+    /*position: absolute;*/
     /*min-height: 600px;*/
     display: inline;
     /*max-height: 400px;*/
     /*margin-right: 20%;*/
     min-width: 50%;
     text-align: center;
-    float: left;
+    /*float: left;*/
     background: whitesmoke;
     padding-left: 10px;
     padding-right: 10px;
@@ -38,9 +39,9 @@ header    {
     position: absolute;
     /*background-color: #0a4d85;*/
     /*max-width: 30%;*/
-    float: left;
-    margin-top: 120px;
-    padding: 25px;
+    /*float: left;*/
+    margin-top: 80px;
+    padding: 10px;
 
 }
 
@@ -134,42 +135,89 @@ header    {
     /*background-size: 100px 100px;*/
     border-style: dashed;
     text-align: center;
-    min-height: 470px;
+    min-height: 420px;
     max-width: 455px;
     /*border-radius: 10%;*/
     z-index: 15;
 
 }
 
-#view1   {
+/*#view1   {*/
+
+    /*position: relative;*/
+    /*!*text-align: center;*!*/
+    /*!*display: inline-block;*!*/
+    /*display: none;*/
+    /*float: left;*/
+    /*width: 54%;*/
+    /*!*min-height: 800px;*!*/
+    /*max-width: 55%;*/
+    /*!*max-height: 10px;*!*/
+    /*!*margin: 0 auto;*!*/
+    /*margin-top: 10px;*/
+    /*padding: 3px;*/
+    /*z-index: 10;*/
+
+/*}*/
+
+#view2   {
+
+    /*position: absolute;*/
+    /*text-align: center;*/
+    /*display: inline-block;*/
+    float: left;
+    /*width: 54%;*/
+    /*max-height: 10px;*/
+    /*margin: 0 auto;*/
+    /*margin-top: 20px;*/
+    /*padding: 3px;*/
+    /*z-index: 10;*/
+
+}
+
+div#username-field   {
 
     position: relative;
     /*text-align: center;*/
     display: inline-block;
     float: left;
-    width: 54%;
-    /*min-height: 800px;*/
-    max-width: 55%;
+    /*     width: 54%; */
     /*max-height: 10px;*/
     /*margin: 0 auto;*/
-    margin-top: 10px;
+    margin-top: 20px;
+    margin-left: 10px;
     padding: 3px;
     z-index: 10;
 
 }
 
-#view2   {
+div#filename-field   {
 
     position: relative;
     /*text-align: center;*/
     display: inline-block;
-    float: left;
-    width: 54%;
+    /*     float: left; */
+    /*     width: 54%; */
     /*max-height: 10px;*/
     /*margin: 0 auto;*/
     margin-top: 20px;
+    /*     margin-left: 20px; */
     padding: 3px;
     z-index: 10;
+
+}
+
+div#select-button-field {
+
+    /*position: absolute;*/
+    /*text-align: center;*/
+    display: inline-block;
+    /*     float: left; */
+    /*     max-height: 10px; */
+    /*     margin: 0 auto; */
+    margin-top: 20px;
+    /*padding: 3px;*/
+    /*z-index: 10;*/
 
 }
 
@@ -206,7 +254,7 @@ header    {
     float: left;
     /*border: 2px solid antiquewhite;*/
     /*padding: 10px;*/
-    margin-top: 570px;
+    margin-top: 505px;
     /*margin-right: 10px;*/
     margin-left: 20px;
     /*margin-bottom: 10px;*/
@@ -235,6 +283,12 @@ header    {
     /*margin-bottom: -1px;*/
     /*min-height: 510px;*/
     /*margin-top: 100px;*/
+
+}
+
+#status {
+
+    position: absolute;
 
 }
 

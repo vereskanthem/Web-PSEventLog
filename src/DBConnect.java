@@ -120,7 +120,7 @@ public class DBConnect {
         try {
 
 //            connection = DriverManager.getConnection(connectionURL,connectionUsername,connectionPassword);
-            connection = DriverManager.getConnection("jdbc:oracle:thin:pseventlog/1@localhost:1521:orcl");
+            connection = DriverManager.getConnection("jdbc:oracle:thin:pseventlog/pwdfromouterspace@cisarch:1521:cisarch");
 
         }   catch(SQLException sqle) {
 
@@ -170,7 +170,7 @@ public class DBConnect {
 
     }
 
-    public List<Map<String, Object>> getListFromDatabase(String _username, String _filename, String firstTime, String lastTime) throws SQLException, NullTimeStringException {
+    public List<Map<String, Object>> getListFromDatabase(String _username, String _filename, String firstTime, String lastTime, String nocache) throws SQLException, NullTimeStringException {
 
         Statement st = connection.createStatement();
 
@@ -188,15 +188,18 @@ public class DBConnect {
 //        if(lastTime.equals("")) throw new NullTimeStringException("End of Time Interval is NULL!");
 
         if(!firstTime.isEmpty())  sqlFirstTime = converter.ConvertMillisecToSQLDateString(firstTime, sqlDateFormat);
+        else    System.out.println("Variable firstTime is empty!");
         if(!lastTime.isEmpty())  sqlLastTime = converter.ConvertMillisecToSQLDateString(lastTime, sqlDateFormat);
+        else    System.out.println("Variable lastTime is empty!");
 
         System.out.println("FirstDate: " + sqlFirstTime);
         System.out.println("LastDate: " + sqlLastTime);
+        System.out.println("nocache: " + nocache);
 
         // Need to add where statement
-        String sql = new String();
+        String sql;
 
-        sql = "SELECT USERNAME,FILENAME,TIME_EVENT from PSEVENTLOG.EVENTSLOG";
+        sql = "SELECT USERNAME,FILENAME,TIME_EVENT from PSEVENTLOG.EVENTSLOG WHERE TIME_EVENT >= TO_DATE('" + sqlFirstTime + "','" + sqlDateFormat + "') and TIME_EVENT <= TO_DATE('" + sqlLastTime + "','" + sqlDateFormat + "')";
 
             if(_username.isEmpty() && !(_filename.isEmpty())) {
                 sql = "SELECT USERNAME,FILENAME,TIME_EVENT from PSEVENTLOG.EVENTSLOG WHERE LOWER(FILENAME) LIKE TRIM(BOTH ' ' FROM LOWER('%" + _filename + "%')) and TIME_EVENT >= TO_DATE('" + sqlFirstTime + "','" + sqlDateFormat + "') and TIME_EVENT <= TO_DATE('" + sqlLastTime + "','" + sqlDateFormat + "')";
@@ -226,7 +229,7 @@ public class DBConnect {
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssz");
             String converted_time = formatter.format(time_event);
 
-            System.out.println("time_event = " + converted_time);
+//            System.out.println("time_event = " + converted_time);
 
             eventData.setUsername(username);
             eventData.setFilename(filename);

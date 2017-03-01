@@ -38,10 +38,14 @@ public class GetFromDB extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        request.setCharacterEncoding("UTF8");
+        response.setCharacterEncoding("UTF8");
+
         String usernameParam  = request.getParameter("username");
         String filenameParam  = request.getParameter("filename");
         String firstDateParam = request.getParameter("firstDate");
         String lastDateParam  = request.getParameter("lastDate");
+        String nocacheParam  = request.getParameter("nocache");
 
         if(usernameParam == null)   {usernameParam = "";}
         if(filenameParam == null)   {filenameParam = "";}
@@ -57,6 +61,7 @@ public class GetFromDB extends HttpServlet {
         System.out.println("filename: " + filenameParam);
         System.out.println("firstDate: " + firstDateParam);
         System.out.println("lastDate: " + lastDateParam);
+        System.out.println("nocache: " + nocacheParam);
 
         DBConnect dbConnection = new DBConnect();
 
@@ -68,7 +73,7 @@ public class GetFromDB extends HttpServlet {
 
         try {
 
-            response.getWriter().write(gson.toJson(dbConnection.getListFromDatabase(usernameParam,filenameParam,firstDateParam,lastDateParam)));
+            response.getWriter().write(gson.toJson(dbConnection.getListFromDatabase(usernameParam,filenameParam,firstDateParam,lastDateParam,nocacheParam)));
 
         } catch (Exception e)   {
 

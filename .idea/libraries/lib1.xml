@@ -1,14 +1,43 @@
 <component name="libraryTable">
   <library name="lib1">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/lib/gson-2.8.0.jar!/" />
-      <root url="jar://$PROJECT_DIR$/lib/json-simple-1.1.1.jar!/" />
-      <root url="jar://$PROJECT_DIR$/lib/ojdbc7.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/DeployEventLog/WEB-INF/lib/javax.servlet.jsp.jstl.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/DeployEventLog/WEB-INF/lib/gson-2.8.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/DeployEventLog/WEB-INF/lib/saaj-api.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/DeployEventLog/WEB-INF/lib/jsr181-api.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/DeployEventLog/WEB-INF/lib/policy.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/DeployEventLog/WEB-INF/lib/jaxb-api.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/DeployEventLog/WEB-INF/lib/json-simple-1.1.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/DeployEventLog/WEB-INF/lib/javax.servlet.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/DeployEventLog/WEB-INF/lib/javax.servlet.jsp.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/DeployEventLog/WEB-INF/lib/stax-ex.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/DeployEventLog/WEB-INF/lib/javax.persistence.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/DeployEventLog/WEB-INF/lib/ojdbc7.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/DeployEventLog/WEB-INF/lib/jaxws-rt.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/DeployEventLog/WEB-INF/lib/javax.annotation.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/DeployEventLog/WEB-INF/lib/jaxws-api.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/DeployEventLog/WEB-INF/lib/FastInoset.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/DeployEventLog/WEB-INF/lib/ha-api.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/DeployEventLog/WEB-INF/lib/woodstox-core-asl.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/DeployEventLog/WEB-INF/lib/jaxws-tools.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/DeployEventLog/WEB-INF/lib/org.osgi.core-6.0.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/DeployEventLog/WEB-INF/lib/jaxb-xjc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/DeployEventLog/WEB-INF/lib/gmbal-api-only.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/DeployEventLog/WEB-INF/lib/mail.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/DeployEventLog/WEB-INF/lib/javax.annotation_2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/DeployEventLog/WEB-INF/lib/javax.jms.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/DeployEventLog/WEB-INF/lib/javax.transaction.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/DeployEventLog/WEB-INF/lib/jaxb-impl.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/DeployEventLog/WEB-INF/lib/javax.ejb.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/DeployEventLog/WEB-INF/lib/management-api.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/DeployEventLog/WEB-INF/lib/saaj-impl.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/DeployEventLog/WEB-INF/lib/streambuffer.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/DeployEventLog/WEB-INF/lib/mimepull.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/DeployEventLog/WEB-INF/lib/org.osgi.core-6.0.0-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/DeployEventLog/WEB-INF/lib/javax.resource.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/DeployEventLog/WEB-INF/lib/stax2-api.jar!/" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES>
-      <root url="file://$PROJECT_DIR$/lib" />
-    </SOURCES>
-    <jarDirectory url="file://$PROJECT_DIR$/lib" recursive="false" type="SOURCES" />
+    <SOURCES />
   </library>
 </component>

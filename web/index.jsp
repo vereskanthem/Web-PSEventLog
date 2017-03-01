@@ -13,13 +13,14 @@
 --%>
 
 <!DOCTYPE html>
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <html>
 
 <title>TryToUseKendoUI</title>
 
-<meta charset="utf-8">
+<%--<meta charset="utf-8">--%>
 
 <link rel="stylesheet" href="styles/main.css">
 <link rel="stylesheet" href="kendo/styles/kendo.common.css">
@@ -83,19 +84,23 @@
 <%--<article>--%>
 
 
-    <div id="view1">
-        <input onfocus="if (this.value=='Enter username please...') this.value = ''" onblur="if (this.value=='') this.value='Enter username please...'" class="k-textbox" id="add-username-textbox" data-bind="value: username" />
-        <input onfocus="if (this.value=='Enter filename please...') this.value = ''" onblur="if (this.value=='') this.value='Enter filename please...'" class="k-textbox" id="add-filename-textbox" data-bind="value: filename" />
-        <button class="k-button" id="jsp-send" data-bind="click: addData">Add Dates and name to DB</button>
-    </div>
-
+    <%--<div id="view1">--%>
+        <%--<input onfocus="if (this.value=='Enter username please...') this.value = ''" onblur="if (this.value=='') this.value='Enter username please...'" class="k-textbox" id="add-username-textbox" data-bind="value: username" />--%>
+        <%--<input onfocus="if (this.value=='Enter filename please...') this.value = ''" onblur="if (this.value=='') this.value='Enter filename please...'" class="k-textbox" id="add-filename-textbox" data-bind="value: filename" />--%>
+        <%--<button class="k-button" id="jsp-send" data-bind="click: addData">Add Dates and name to DB</button>--%>
+    <%--</div>--%>
     <div id="view2">
-        <input onfocus="if (this.value=='Enter username please...') this.value = ''" onblur="if (this.value=='') this.value='Enter username please...'" class="k-textbox" id="get-username-textbox" data-bind="value: username" />
-        <input onfocus="if (this.value=='Enter filename please...') this.value = ''" onblur="if (this.value=='') this.value='Enter filename please...'" class="k-textbox" id="get-filename-textbox" data-bind="value: filename" />
-        <button class="k-button" id="jsp-receive" data-bind="click: getData">SELECT data from DB</button>
-        <%--onClick="javascript:location.href = '#db-out';"--%>
+        <div id="username-field">
+            <input onfocus="if (this.value=='Enter username please...') this.value = ''" onblur="if (this.value=='') this.value='Enter username please...'" class="k-textbox" id="get-username-textbox" data-bind="value: username" />
+        </div>
+        <div id="filename-field">
+            <input onfocus="if (this.value=='Enter filename please...') this.value = ''" onblur="if (this.value=='') this.value='Enter filename please...'" class="k-textbox" id="get-filename-textbox" data-bind="value: filename" />
+        </div>
+        <div id="select-button-field">
+            <button class="k-button" id="jsp-receive" data-bind="click: getData">SELECT data from DB</button>
+            <%--onClick="javascript:location.href = '#db-out';"--%>
+        </div>
     </div>
-
     <%--<div id="view2" margin-bottom="20px">--%>
 
     <%--</div>--%>
@@ -127,6 +132,7 @@
 
 <div id="db-out">
 
+    <div id="status"/>
     <div id="listView" class="k-content"/>
     <div id="pager" class="k-pager-wrap"/>
 
@@ -168,8 +174,6 @@
             username_textbox = this.get("username");
 //            filename_textbox = $("#add-filename-textbox").val();
             filename_textbox = this.get("filename");
-
-
 
 //            alert("\"" + username_textbox + "\"");
 //            alert("\"" + filename_textbox + "\"");
@@ -279,6 +283,8 @@
             if((username_textbox == "" && filename_textbox == "") || (username_textbox == 'Enter username please...' && filename_textbox == 'Enter filename please...') || (username_textbox == 'Enter username please...' && filename_textbox == '') || (username_textbox == '' && filename_textbox == 'Enter filename please...'))    {
 
 //                alert("Setting up username and filename like empty string!");
+//                alert(firstDate);
+//                alert(lastDate);
 
                 json_buffer = {
 
@@ -370,50 +376,67 @@
                         }
                     }
                 },
+                change: function (e) {
+                    $("#status").innerHTML("qwer");
+                },
                 pageSize: 15
             });
 
-            $("#listView").kendoGrid({
+//            $("#listView").html(json_buffer);
 
-                toolbar: ["excel", "pdf"],
-                excel: {
-                    fileName: "Export.xlsx",
-                    allPages: true,
-                    filterable: true
-                },
-                pdf: {
-                    filename: "Export.pdf",
-                    allPages: true,
-                    filterable: true
-                },
-                allowCopy: true,
-                resizable: true,
-                navigatable: true,
+//            if(json_buffer ==)   {
+
+//                $("#listView").html("<li><b>Ничего не найдено!</b> Нет данных с указанными параметрами. Попробуйте изменить дату или уточните корректность введенного имени пользователя или файла.</li>");
+//                  $("#listView").html(json_buffer);
+
+//            }   else {
+
+//                alert("Данных по выбоке из базы: " + dataSource.total());
+
+//                $("#listView").html("<li><b>Идет процесс выборки из базы... </b></li>");
+
+                $("#listView").kendoGrid({
+
+                    toolbar: ["excel", "pdf"],
+                    excel: {
+                        fileName: $.now() + ".xlsx",
+                        allPages: true,
+                        filterable: true
+                    },
+                    pdf: {
+                        filename: $.now() + ".pdf",
+                        allPages: true,
+                        filterable: true
+                    },
+                    allowCopy: true,
+                    resizable: true,
+                    navigatable: true,
 //                selectable: "multiple cell",
-                selectable: true,
-                dataSource: dataSource,
-                pageable: true,
-                filterable: true,
-                groupable: true,
-                sortable: {
-                    mode: "multiple",
-                    allowUnsort: true
-                },
-                columns: [
+                    selectable: true,
+                    dataSource: dataSource,
+                    pageable: true,
+                    filterable: true,
+//                    groupable: true,
+                    sortable: {
+                        mode: "multiple",
+                        allowUnsort: true
+                    },
+                    columns: [
 
-                    { field: "USERNAME", title: "USERNAME", width: "100px" },
-                    { field: "FILENAME", title: "FILENAME", width: "100px" },
-                    {
-                        field: "TIME_EVENT",
-                        title: "TIME_EVENT",
-                        width: "120px",
-                        format: "{0:dd.MM.yyyy HH:mm}"
+                        {field: "USERNAME", title: "Пользователь", width: "100px"},
+                        {field: "FILENAME", title: "Имя файла", width: "100px"},
+                        {
+                            field: "TIME_EVENT",
+                            title: "Время удаления",
+                            width: "60px",
+                            format: "{0:dd.MM.yyyy HH:mm}"
 //                        template: "#= kendo.toString(kendo.parseDate(TIME_EVENT, 'yyyy-MM-dd'T'HH:mm:ssz'), 'dd.MM.yyyy hh:mm') #"
-                    }
+                        }
 
-                ]
-            });
+                    ]
+                });
 
+//            }
 //            $('#pager').show();
 
 //            $("#pager").kendoPager({

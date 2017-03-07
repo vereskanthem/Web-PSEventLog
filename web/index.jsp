@@ -97,7 +97,7 @@
             <input onfocus="if (this.value=='Enter filename please...') this.value = ''" onblur="if (this.value=='') this.value='Enter filename please...'" class="k-textbox" id="get-filename-textbox" data-bind="value: filename" />
         </div>
         <div id="select-button-field">
-            <button class="k-button" id="jsp-receive" data-bind="click: getData">SELECT data from DB</button>
+            <button class="k-button" id="jsp-receive" data-bind="click: getData" onclick="document.location='#anchor-before-db-out'; return false;">SELECT data from DB</button>
             <%--onClick="javascript:location.href = '#db-out';"--%>
         </div>
     </div>
@@ -111,6 +111,7 @@
 
 </article>
 </div>
+
 <%--<div class="search-result">--%>
 <%--<div id="div-head-iscription" class="k-content"> Output of JS/JAVA+DB: </div>--%>
 
@@ -130,11 +131,13 @@
 
 <%--</div>--%>
 
+<div id="anchor-before-db-out"></div>
+
 <div id="db-out">
 
-    <div id="status"/>
-    <div id="listView" class="k-content"/>
-    <div id="pager" class="k-pager-wrap"/>
+    <div id="status"></div>
+    <div id="pager" class="k-pager-wrap"></div>
+    <div id="listView" class="k-content"></div>
 
 </div>
 
@@ -143,6 +146,12 @@
 <script src="kendo/js/jszip.min.js"></script>
 
 <script>
+
+    $("select-button-field").click(function()   {
+
+        window.location.hash = "#" + $(this).attr("db-out");
+
+    });
 
     <%-- Create the View-Model --%>
     var addDataToDB;
@@ -267,6 +276,8 @@
 
             var json_buffer;
 
+
+
             calendar = $("#calendar-from-date").data("kendoCalendar");
             // .getTime() - get time in milliseconds
             firstDate = calendar.current().getTime();
@@ -376,10 +387,13 @@
                         }
                     }
                 },
-                change: function (e) {
-                    $("#status").innerHTML("qwer");
-                },
-                pageSize: 15
+//                serverPaging: true,
+//                serverFiltering: true,
+                pageSize: 7
+//                serverSorting: true
+//                change: function (e) {
+//                    $("#status").innerHTML("qwer");
+//                }
             });
 
 //            $("#listView").html(json_buffer);
@@ -394,41 +408,58 @@
 //                alert("Данных по выбоке из базы: " + dataSource.total());
 
 //                $("#listView").html("<li><b>Идет процесс выборки из базы... </b></li>");
+//            alert(dataSource.size());
 
                 $("#listView").kendoGrid({
 
                     toolbar: ["excel", "pdf"],
                     excel: {
                         fileName: $.now() + ".xlsx",
-                        allPages: true,
+//                        allPages: true,
                         filterable: true
                     },
                     pdf: {
                         filename: $.now() + ".pdf",
-                        allPages: true,
+//                        allPages: true,
                         filterable: true
                     },
-                    allowCopy: true,
-                    resizable: true,
+                    allowCopy: {
+                        delimeter: ",",
+                    },
+//                    autoBind: false,
                     navigatable: true,
-//                selectable: "multiple cell",
-                    selectable: true,
+                    selectable: "multiple cell",
+//                    selectable: true,
                     dataSource: dataSource,
-                    pageable: true,
-                    filterable: true,
+//                    endlessScroll: true,
+//                    virtualViewSize: 50,
+                    pageable: {
+                        refresh: true,
+                        pageSize: false
+                    },
+//                    pageSize: 10,
+//                    serverPaging: true,
+//                    serverSorting: true,
+//                    width: "100%",
+//                    height: "100%",
+                    resizable: false,
+//                    filterable: true,
 //                    groupable: true,
+//                    scrollable: {
+//                        virtual: true
+//                    },
                     sortable: {
                         mode: "multiple",
                         allowUnsort: true
                     },
                     columns: [
 
-                        {field: "USERNAME", title: "Пользователь", width: "100px"},
-                        {field: "FILENAME", title: "Имя файла", width: "100px"},
+                        {field: "USERNAME", title: "Пользователь", width: "300px"},
+                        {field: "FILENAME", title: "Имя файла"},
                         {
                             field: "TIME_EVENT",
                             title: "Время удаления",
-                            width: "60px",
+                            width: "250px",
                             format: "{0:dd.MM.yyyy HH:mm}"
 //                        template: "#= kendo.toString(kendo.parseDate(TIME_EVENT, 'yyyy-MM-dd'T'HH:mm:ssz'), 'dd.MM.yyyy hh:mm') #"
                         }
@@ -436,7 +467,6 @@
                     ]
                 });
 
-//            }
 //            $('#pager').show();
 
 //            $("#pager").kendoPager({
@@ -458,10 +488,10 @@
     kendo.bind($('#view2'), getDataFromDB);
 
     $("#calendar-from-date").kendoCalendar({
-        min: new Date(2016,7,1),
-        max: new Date(2020,7,1),
+        min: new Date(2016,9,1),
+        max: new Date(2020,9,1),
         start: 'month',
-//        value: new Date(2016,7,22),
+        value: new Date(2017,0,11),
         change: function(e) {
 
             console.log(e)
@@ -473,13 +503,21 @@
         min: new Date(2016,7,1),
         max: new Date(2020,7,1),
         start: 'month',
-//        value: new Date(2016,12,1),
+        value: new Date(2017,0,11),
+//        dates: new Date(2017,13,1),
         change: function(e) {
 
             console.log(e)
 
         }
     });
+
+//    $(window).scroll(function(){
+//        if ($(window).scrollTop() == $(document).height() - $(window).height()){
+////            alert("We're at the bottom of the page!!");
+//        }
+//    });
+//
 
     $(document).ready(function() {
        $('#pager').hide();

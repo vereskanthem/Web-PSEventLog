@@ -16,6 +16,12 @@ public class DBConnect {
     private String connectionUsername;
     private String connectionPassword;
 
+    private String inputUsername;
+    private String inputFilename;
+
+    private String inputFirstDate;
+    private String inputLastDate;
+
     private int statusConnection;
     private int oracleConnectClassExist;
     private Connection connection;
@@ -23,6 +29,8 @@ public class DBConnect {
     String sqlDateFormat;
 
     EventsData data = new EventsData();
+
+    private String[] excludeNames = new String[10];
 
     public DBConnect() {
 
@@ -60,6 +68,31 @@ public class DBConnect {
     private void setOracleConnectClassExist(int oracleConnectClassExist)  {
 
         this.oracleConnectClassExist = oracleConnectClassExist;
+
+    }
+
+
+    public void setInputUsername(String username)    {
+
+        this.inputUsername = username;
+
+    }
+
+    public void setInputFilename(String filename)    {
+
+        this.inputFilename = filename;
+
+    }
+
+    public void setInputFirstDate(String FirstDate)    {
+
+        this.inputFirstDate = FirstDate;
+
+    }
+
+    public void setInputLastDate(String LastDate)    {
+
+        this.inputLastDate = LastDate;
 
     }
 
@@ -192,6 +225,20 @@ public class DBConnect {
         if(!lastTime.isEmpty())  sqlLastTime = converter.ConvertMillisecToSQLDateString(lastTime, sqlDateFormat);
         else    System.out.println("Variable lastTime is empty!");
 
+//        if(_username == "" || _username == "Enter username please...") {
+//
+//            setInputUsername("");
+//
+//        }
+//
+//        if(_filename == "" || _username == "Enter filename please...") {
+//
+//            setInputFilename("");
+//
+//        }
+
+//        System.out.println("UserName: " + _username);
+//        System.out.println("FileName: " + _filename);
         System.out.println("FirstDate: " + sqlFirstTime);
         System.out.println("LastDate: " + sqlLastTime);
         System.out.println("nocache: " + nocache);
@@ -199,14 +246,19 @@ public class DBConnect {
         // Need to add where statement
         String sql;
 
-        sql = "SELECT USERNAME,FILENAME,TIME_EVENT from PSEVENTLOG.EVENTSLOG WHERE TIME_EVENT >= TO_DATE('" + sqlFirstTime + "','" + sqlDateFormat + "') and TIME_EVENT <= TO_DATE('" + sqlLastTime + "','" + sqlDateFormat + "')";
+        excludeNames[0] = "AJakovchitc";
+        excludeNames[1] = "VLozhnikov";
+        excludeNames[2] = "VVelichko";
+        excludeNames[3] = "AMamonov";
+
+        sql = "SELECT USERNAME,FILENAME,TIME_EVENT from PSEVENTLOG.EVENTSLOG WHERE TIME_EVENT >= TO_TIMESTAMP('" + sqlFirstTime + "','" + sqlDateFormat + "') and TIME_EVENT <= TO_TIMESTAMP('" + sqlLastTime + "','" + sqlDateFormat + "') and USERNAME != " + "'" + excludeNames[0] + "'";
 
             if(_username.isEmpty() && !(_filename.isEmpty())) {
-                sql = "SELECT USERNAME,FILENAME,TIME_EVENT from PSEVENTLOG.EVENTSLOG WHERE LOWER(FILENAME) LIKE TRIM(BOTH ' ' FROM LOWER('%" + _filename + "%')) and TIME_EVENT >= TO_DATE('" + sqlFirstTime + "','" + sqlDateFormat + "') and TIME_EVENT <= TO_DATE('" + sqlLastTime + "','" + sqlDateFormat + "')";
+                sql = "SELECT USERNAME,FILENAME,TIME_EVENT from PSEVENTLOG.EVENTSLOG WHERE LOWER(FILENAME) LIKE TRIM(BOTH ' ' FROM LOWER('%" + _filename + "%')) and TIME_EVENT >= TO_TIMESTAMP('" + sqlFirstTime + "','" + sqlDateFormat + "') and TIME_EVENT <= TO_TIMESTAMP('" + sqlLastTime + "','" + sqlDateFormat + "')";
             }
 
             if(_filename.isEmpty() && !(_username.isEmpty())) {
-                sql = "SELECT USERNAME,FILENAME,TIME_EVENT from PSEVENTLOG.EVENTSLOG WHERE LOWER(USERNAME) LIKE TRIM(BOTH ' ' FROM LOWER('%" + _username + "%')) and TIME_EVENT >= TO_DATE('" + sqlFirstTime + "','" + sqlDateFormat + "') and TIME_EVENT <= TO_DATE('" + sqlLastTime + "','" + sqlDateFormat + "')";
+                sql = "SELECT USERNAME,FILENAME,TIME_EVENT from PSEVENTLOG.EVENTSLOG WHERE LOWER(USERNAME) LIKE TRIM(BOTH ' ' FROM LOWER('%" + _username + "%')) and TIME_EVENT >= TO_TIMESTAMP('" + sqlFirstTime + "','" + sqlDateFormat + "') and TIME_EVENT <= TO_TIMESTAMP('" + sqlLastTime + "','" + sqlDateFormat + "')";
             }
 
             if(!(_username.isEmpty()) && !(_filename.isEmpty()))  {

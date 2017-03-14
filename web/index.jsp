@@ -32,20 +32,30 @@
 <link rel="stylesheet" href="kendo/styles/kendo.mobile.common.min.css">
 <link rel="stylesheet" href="kendo/styles/kendo.mobile.common.black.min.css">
 
+
 </head>
 
 <body>
 <div class="header-container">
     <header class="mini-container k-header">
-        <h2>This page content includes same examples of using KendoUI.</h2>
-        <h3>----------------------------------------------------------</h3>
-        <h4>Yo-ho-ho! And the bottle of Rum!</h4>
+        <h2>Статистистика по удаленным файлам операционной системы</h2>
+        <h3>
+            <div id="center">
+            ----------------------------------------------------------
+            <%--<button class="k-button" id="ontopbutton" onclick="document.location='#view2'; return false;">К Поиску</button>--%>
+            <button class="k-button" id="ontopbutton">К Поиску</button>
+            ----------------------------------------------------------
+            </div>
+        </h3>
+        <h4>
+            Сбор статистики происходит из базы данных, которая заполняется путем парсинга связки событий попадающих под аудит на файловом сервере
+        </h4>
     </header>
     <%--<nav>--%>
         <%--<button id="nav-button1" class="head-button k-button"> Button to check Data Send through JAVA</button>--%>
     <%--</nav>--%>
 </div>
-
+<%--<a name="test"></a>--%>
 <%--<nav>--%>
     <%--<ul>--%>
         <%--<li><a href="#onepage"/></li>--%>
@@ -58,6 +68,7 @@
     <div id="calendar-from-date"></div>
     <div id="calendar-to-date"></div>
 </div>
+
 </div>
 <div style="clear:both"></div>
 <div class="example-inscriptions k-content">
@@ -73,17 +84,15 @@
         <li>Set <b>USERNAME or FILENAME </b> in textboxes</li>
         <li><b>Click SELECT Button</b> to GET data from table in DB</li>
     </ul>
-</div>
 
+    <div id="dataSourceCount">No data!</div>
+</div>
 
 <%--<div class="example-inscriptions k-content">--%>
 
 <%--</div>--%>
-
 <div class="search-panel k-content">
 <%--<article>--%>
-
-
     <%--<div id="view1">--%>
         <%--<input onfocus="if (this.value=='Enter username please...') this.value = ''" onblur="if (this.value=='') this.value='Enter username please...'" class="k-textbox" id="add-username-textbox" data-bind="value: username" />--%>
         <%--<input onfocus="if (this.value=='Enter filename please...') this.value = ''" onblur="if (this.value=='') this.value='Enter filename please...'" class="k-textbox" id="add-filename-textbox" data-bind="value: filename" />--%>
@@ -144,12 +153,22 @@
 <script src="kendo/js/jquery.min.js"></script>
 <script src="kendo/js/kendo.all.min.js"></script>
 <script src="kendo/js/jszip.min.js"></script>
+<%--<script src=""></script>--%>
 
 <script>
+
+    kendo.culture("ru-RU");
 
     $("select-button-field").click(function()   {
 
         window.location.hash = "#" + $(this).attr("db-out");
+
+    });
+
+    $("#ontopbutton").click(function()   {
+
+        //noinspection JSValidateTypes
+        $('html,body').scrollTop(0);
 
     });
 
@@ -389,7 +408,7 @@
                 },
 //                serverPaging: true,
 //                serverFiltering: true,
-                pageSize: 7
+//                pageSize: 7
 //                serverSorting: true
 //                change: function (e) {
 //                    $("#status").innerHTML("qwer");
@@ -433,10 +452,10 @@
                     dataSource: dataSource,
 //                    endlessScroll: true,
 //                    virtualViewSize: 50,
-                    pageable: {
-                        refresh: true,
-                        pageSize: false
-                    },
+//                    pageable: {
+//                        refresh: true,
+//                        pageSize: 6
+//                    },
 //                    pageSize: 10,
 //                    serverPaging: true,
 //                    serverSorting: true,
@@ -467,6 +486,8 @@
                     ]
                 });
 
+
+
 //            $('#pager').show();
 
 //            $("#pager").kendoPager({
@@ -487,11 +508,18 @@
     kendo.bind($('#view1'), addDataToDB);
     kendo.bind($('#view2'), getDataFromDB);
 
+//    currentdate = new Date();
+
+//    yesterday = currentdate.getDate() - 1;
+//    daybeforeyesterday = yesterday.getDate() - 1;
+
+//    $("#calendar-from-date").closest("span.k-datepicker").width(500);
+
     $("#calendar-from-date").kendoCalendar({
         min: new Date(2016,9,1),
         max: new Date(2020,9,1),
         start: 'month',
-        value: new Date(2017,0,11),
+//        value: daybeforeyesterday,
         change: function(e) {
 
             console.log(e)
@@ -503,7 +531,7 @@
         min: new Date(2016,7,1),
         max: new Date(2020,7,1),
         start: 'month',
-        value: new Date(2017,0,11),
+//        value: yesterday,
 //        dates: new Date(2017,13,1),
         change: function(e) {
 
@@ -520,7 +548,15 @@
 //
 
     $(document).ready(function() {
+
        $('#pager').hide();
+
+    });
+
+    $(document).ready(function()    {
+
+        $('#dataSourceCount').hide();
+
     });
 
 </script>

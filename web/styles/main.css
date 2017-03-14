@@ -256,8 +256,8 @@ div#select-button-field {
     /**/
     /*margin-left: 20px;*/
 
-    margin: 500px 10px 10px;
-    height: 75%;
+    margin: 520px 10px 10px;
+    height: 80%;
     width: 98%;
 
     resize: none;
@@ -312,6 +312,14 @@ div#select-button-field {
     margin-top: 465px;
 }
 
+#anchor-on-top  {
+
+    /*position: relative;*/
+
+    margin-top: -200px;
+
+}
+
 #pager  {
 
     max-height: 50px;
@@ -321,5 +329,27 @@ div#select-button-field {
 .k-button   {
 
     min-width: 38%;
+    /*border-color: #ffffff;*/
+
+}
+
+#ontopbutton    {
+
+    /*position: ;*/
+    background-color: #00aba9;
+
+}
+
+#center {
+
+    float: none;
+    margin-left: 30px;
+
+}
+
+#dataSourceCount    {
+
+    position: relative;
+    margin: 20px;
 
 }
